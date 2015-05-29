@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Beauty Wares</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="css/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+   <!--  <link href="dist/css/timeline.css" rel="stylesheet"> -->
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+   <!--  <link href="bower_components/morrisjs/morris.css" rel="stylesheet"> -->
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		
+		<style class="cp-pen-styles">
+.indent-small {
+  margin-left: 5px;
+}
+.form-group.internal {
+  margin-bottom: 0;
+}
+label.control-label {
+  font-weight: 600;
+  color: #777;
+}
+</style>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="login.html">Beauty Wares</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <!-- <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li> -->
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">                       
+                        <li>
+                            <a href="employeeTable.html"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-adn fa-fw"></i> Admin<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="department.html"><i class="fa fa-delicious fa-fw"></i>Department</a>
+                                </li>
+							</ul>	
+                                <li>
+                                    <a href="#"><i class="fa fa-group fa-fw"></i>Employees<span class="fa arrow"></span></a>
+									 <ul class="nav nav-second-level">
+										<li>
+											<a href="employee.html">Create</a>
+										</li>
+										<li>
+											<a href="promotion.html">Promote</a>
+										</li>
+										<li>
+											<a href="increment.html">Increment</a>
+										</li>
+										<li>
+											<a href="resignation.html">Resign</a>
+										</li>
+									</ul>									
+                                </li>								 
+                            
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> CRM<span class="fa arrow"></span></a>
+							 <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="customer.html">Customer</a>
+                                </li>
+                                <li>
+                                    <a href="vendor.html">Vendor</a>
+                                </li>
+								 <li>
+                                    <a href="clientProject.html">Client Project</a>
+                                </li>
+								<li>
+                                    <a href="visitDetail.html">Visitor Details</a>
+                                </li>
+								<li>
+                                    <a href="callTracking.html">Call Tracking</a>
+                                </li>
+								<li>
+                                    <a href="projectVendors.html">Client / Prospect Project Vendors</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Reports</a>
+                        </li>  
+						<li>
+                            <a href="usercreation.html"><i class="fa fa-user fa-fw"></i>User Creation</a>
+                         </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 class="page-header">Call Tracking</h4>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+           
+            <!-- /.row -->
+            <div class="row">
+                
+                <!-- /.col-lg-8 -->
+                <form class="form-horizontal" role="form">
+           <div class="form-group">
+            <label class="control-label col-md-2 col-md-offset-2" for="id_accomodation">Customer Id</label>
+			<div class="col-md-8">
+            <div class="col-md-3">
+			 <div class="form-group internal">
+              <input class="form-control" id="id_employee_code" placeholder="C001" type="text">
+			 </div>
+            </div>
+			<label class="control-label col-md-3" for="id_checkout">Contact Id</label>
+              <div class="col-md-3">
+			  <div class="form-group internal">
+			   <input class="form-control" id="id_employee_code" placeholder="Contact Id" type="text">                 
+              </div>			  
+			  </div> 
+			</div>
+          </div> 
+          <div class="form-group">
+            <label class="control-label col-md-2 col-md-offset-2" for="id_title">Call Type</label>
+            <div class="col-md-8">
+              <div class="col-md-3">
+                <div class="form-group internal">
+                 <select class="form-control" id="id_title">
+					<option>New Call</option>
+                    <option>Follow-up</option>
+                    <option>Payment</option>
+                    <option>Complaint</option>     
+					<option>Requirement</option>		
+					<option>Negotiation</option>		
+					<option>PO & Advance Received</option>		
+					<option>Bank Work</option>		
+					<option>Material Unloading</option>		
+					<option>Others</option>											
+                  </select>
+                </div>
+              </div>
+              <label class="control-label col-md-3" for="id_checkout">Planned Call Date Time</label>
+              <div class="col-md-3">
+			  <div class="form-group internal input-daterange" id="id_planneddate">
+                <input class="form-control" id="id_adults" placeholder="dd/mm/yyyy" type="text">
+              </div>			  
+			  </div>              
+            </div>
+          </div>		  
+           
+		 
+		  <div class="form-group">
+            <label class="control-label col-md-2 col-md-offset-2" for="id_age">Call Status</label>
+            <div class="col-md-8">
+              <div class="col-md-3">
+                <div class="form-group internal">
+				  <input class="form-control" id="id_adults" placeholder="Status" type="number">
+                </div>
+              </div>
+			  <label class="control-label col-md-3" for="id_checkout">Actual Call Date Time</label>
+			  <div class="col-md-3">
+                <div class="form-group internal input-daterange" id="id_actualdate">
+                 <input class="form-control" id="id_adults" placeholder="dd/mm/yyyy" type="text">
+                </div>
+              </div>
+			 
+            </div>
+          </div>          
+		  
+		  <div class="form-group">
+            <label class="control-label col-md-2 col-md-offset-2" for="id_age">Name of Sales Executive</label>
+            <div class="col-md-8">
+              <div class="col-md-3">
+                <div class="form-group internal">
+				<select class="form-control" id="id_title">
+                 <option>XXX</option>
+                    <option>YYY</option>
+                    <option>ZZZ</option>                    							
+                  </select>				
+                </div>
+              </div>
+			<label class="control-label col-md-3" for="id_checkout">Next Follow-up Date Time</label>
+              <div class="col-md-3">
+			  <div class="form-group internal input-daterange" id="id_nextdate">
+                <input class="form-control" id="id_adults" placeholder="dd/mm/yyyy" type="text">
+              </div>			  
+			  </div>
+            </div>
+          </div>
+		  
+		 
+		  <div class="form-group">
+            <label class="control-label col-md-2 col-md-offset-2" for="id_comments">Call Status Reason </label>
+            <div class="col-md-6">
+              <textarea class="form-control" id="id_comments" placeholder="Call Status Reason " rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-offset-4 col-md-3">
+              <button class="btn btn-sm btn-primary" type="button" id="id_submit" onclick="location.href='customerTable.html';">Submit</button>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-sm btn-danger" style="float:right" type="button" onclick="location.href='customerTable.html';">Cancel</button>
+            </div
+        </form>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/metisMenu.min.js"></script>
+	<!-- <script src="js/jquery.navgoco.js"></script> -->
+
+    <!-- Morris Charts JavaScript -->
+    <!-- <script src="bower_components/raphael/raphael-min.js"></script>
+    <script src="bower_components/morrisjs/morris.min.js"></script>
+    <script src="js/morris-data.js"></script> -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+	<link href="css/datapicker.css" rel="stylesheet" type="text/css"></link>
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+	<script src="js/datapicker.js"></script>
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                
+                $('#id_planneddate,#id_actualdate,#id_nextdate').datepicker({
+                    format: "dd/mm/yyyy"
+                });  
+            
+            });
+        </script>
+</body>
+
+</html>

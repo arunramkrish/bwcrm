@@ -1,0 +1,1 @@
+mongod --dbpath %BWCRM_HOME%\db

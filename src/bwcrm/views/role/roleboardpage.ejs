@@ -1,0 +1,90 @@
+<table id="roletable"></table>
+<br />
+<center>
+<button onclick="doUser(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
+<button onclick="doUser(2);" id="btnEdit" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+<button onclick="doUser(3);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+</center>
+
+<script>
+    function doUser(a){
+        if( a === 1 ){
+            window.location = '/roleadd';
+        }
+        else if ( a === 2){
+            //edit 
+            var selectedRows =  $('#roletable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/roleupdate?id=" + selectedRow.id);
+            window.location = uri ;
+        }else{
+
+            alertify.confirm("Delete User ?", function (e) {
+                if (e) {
+                    var selectedRows =  $('#roletable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];     
+                    $.get('/roledelete' , { id : selectedRow.id }).done(function(data){
+                        console.log(data);
+                        if(data.status !== undefined ){
+                            alertify.success('<i class="fa fa-trash"></i> &nbsp; Role Deleted');
+                            $('#roletable').bootstrapTable('refresh' , { url : '/listroles'} );
+                        }
+                    });
+                } else {
+
+                }
+            });            
+
+        }
+    }
+
+
+    $(function () {
+
+            $('#roletable').bootstrapTable({
+                method: 'get',
+                url: '/listroles',
+                cache: false,
+                height: 500,
+                striped: false ,
+                pagination: false,
+                search: true,
+                showRefresh: true,
+                clickToSelect: true,
+                onCheck : function(row){
+                    document.getElementById('btnEdit').disabled = false ;
+                    document.getElementById('btnDelete').disabled = false ;
+                } ,
+
+                columns: [{
+                    field: 'state',
+                    radio : true
+                },
+
+                {
+                    field: 'id',
+                    title: 'Id',
+                    visible : false  
+                } ,                
+
+                {
+                    field: 'title',
+                    title: 'Title',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true 
+                } ,
+
+                {
+                    field: 'description',
+                    title: 'Description',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: false 
+                } 
+                ]
+            });
+
+    });
+</script>
+

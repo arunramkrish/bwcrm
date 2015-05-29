@@ -1,0 +1,170 @@
+<table id="usertable"></table>
+<br />
+<center>
+<button onclick="doUser(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
+<button onclick="doUser(2);" id="btnEdit" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+<button onclick="doUser(3);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+</center>
+
+
+<script>
+    function doUser(a){
+    	if( a === 1 ){
+    		window.location = '/signup';
+    	}
+    	else if ( a === 2){
+    		//edit 
+            var selectedRows =  $('#usertable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/useredit?id=" + selectedRow.id);
+            window.location = uri ;
+    	}else{
+
+            alertify.confirm("Delete User ?", function (e) {
+                if (e) {
+                    var selectedRows =  $('#usertable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];     
+                    $.get('/deleteuser' , { id : selectedRow.id }).done(function(data){
+                        console.log(data);
+                        if(data.status !== undefined ){
+                            alertify.success('<i class="fa fa-trash"></i> &nbsp; User Deleted');
+                            $('#usertable').bootstrapTable('refresh' , { url : '/listusers'} );
+                        }
+                    });
+                } else {
+
+                }
+            });            
+
+    	}
+    }
+
+    $(function () {
+
+            $('#usertable').bootstrapTable({
+                method: 'get',
+                url: '/listusers',
+                cache: false,
+                height: 500,
+                striped: false ,
+                pagination: false,
+                search: true,
+                showRefresh: true,
+                clickToSelect: true,
+                onCheck : function(row){
+                	document.getElementById('btnEdit').disabled = false ;
+                    document.getElementById('btnDelete').disabled = false ;
+                } ,
+
+                columns: [{
+                    field: 'state',
+                    radio : true
+                } , 
+                {
+                    field: 'id',
+                    title: 'Id',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: false , 
+                    visible : false 
+                } ,
+
+                {
+                    field: 'ecode',
+                    title: 'Employee Code',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true 
+                } ,
+
+                {
+                    field: 'ename',
+                    title: 'Employee Name',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } , 
+
+                {
+                    field: 'doj',
+                    title: 'Date of Joining',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } ,
+
+                {
+                    field: 'dept',
+                    title: 'Department',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } ,
+
+                {
+                    field: 'desg',
+                    title: 'Designation',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true 
+                } ,
+
+                {
+                    field: 'contnum',
+                    title: 'Contact Number',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } ,
+
+                {
+                    field: 'ctc',
+                    title: 'CTC',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } ,
+
+                {
+                    field: 'username',
+                    title: 'Login ID',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } ,
+
+               
+                {
+                    field: 'status',
+                    title: 'Status',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } ,
+
+
+                { 
+                    field: 'role',
+                    title: 'role',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true 
+                } ,
+
+
+                {
+                    field: 'dor',
+                    title: 'Date of Resignation',
+                    align: 'left',
+                    valign: 'middle',
+                    sortable: true
+                } 
+
+                ]
+            });
+
+
+
+    });
+</script>
+

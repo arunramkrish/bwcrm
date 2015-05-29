@@ -1,0 +1,177 @@
+<% var labelColClass = 'col-lg-2 calibriFont' %>
+         <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+         <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+         <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+         <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+         <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+         <% var formGroup = ' margin-bottom : 2px; ' %>        
+        
+
+<div class="col-lg-12">
+<div class="well bs-component">
+<form id="myform" class="form-horizontal" method="post" action="/userupdate">
+  <fieldset>
+    <legend>User Details</legend>
+
+        <input type="hidden" name="id" value=<%= p_user.id %> />
+
+        <!--Ecode  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="ecode" >Employee code</label>
+          <div class="<%= textBoxColClass %>"> 
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" name="ecode" id="ecode" value=<%= p_user.ecode %> required readonly>
+          </div>
+        </div>
+    
+        <!--Ename -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>"  for="ename" >Employee name</label>
+          <div class="<%= textBoxColClass %>"> 
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" name="ename" id="ename" value=<%= p_user.ename%>  required >
+          </div>
+        </div>
+
+
+        <!-- Date of joining -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="doj" >Date of joining</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" class="form-control datepicker" type="date" placeholder="mm-dd-yyyy" name="doj" id="doj" value=<%= p_user.doj %> required >
+           </div>
+        </div>  
+        
+       
+        <!-- Department -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="dept" >Department</label>
+          <div class="<%= textBoxColClass %>">
+            <input type="text" style="<%= textInputStyle %>" class="form-control" name="dept" id="dept" value=<%= p_user.dept %> required>
+          </div>
+        </div>
+
+        <!--Designatione -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="desg" >Designation</label>
+          <div class="<%= textBoxColClass %>">
+            <input type="text" style="<%= textInputStyle %>" class="form-control" name="desg" id="desg" value=<%= p_user.desg %> required>
+          </div>
+        </div>
+
+        <!-- Contact Number  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contnum" >Contact Number</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" name="contnum" id="contnum" value=<%= p_user.contnum %> required>
+          </div>
+        </div>        
+
+         <!-- CTC  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="ctc" >CTC</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" name="ctc" id="ctc" value=<%= p_user.ctc %> required>
+          </div>
+        </div>    
+
+      <!-- User name -->
+      <div class="form-group" style="<%= formGroup %>">
+        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="loginid" >Login ID</label>
+        <div class="<%= textBoxColClass %>">
+          <input type="text" style="<%= textInputStyle %>" class="form-control" name="username" id="username" value=<%=p_user.username %> required readonly>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group" style="<%= formGroup %>">
+        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="password" >Password</label>
+        <div class="<%= textBoxColClass %>">
+         <input type="password" style="<%= textInputStyle %>" class="form-control" name="password" id="password" required>
+        </div>
+      </div>
+
+       <!-- Status  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="status" >Status</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" name="status" id="status" value=<%= p_user.status %> required>
+          </div>
+        </div>    
+
+
+      <!-- Role -->
+      <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="role" >Role</label>
+          <div class="<%= textBoxColClass %>">
+            <select style="<%= selectBoxStyle %>" name="role" id="role" required>
+                    <% for(var i=0 ; i< roles.length ; i++) { %>
+                        <option <% if(p_user.role.id.localeCompare(roles[i].id) === 0 ) { %> selected <% } %>>
+                          <%= roles[i].title %>
+                        </option>
+                    <% } %>
+            </select>
+        </div>
+      </div>
+
+
+       <!-- Date of Resignation-->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="dor" >Date of Resignation</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" class="form-control datepicker" type="date" placeholder="mm-dd-yyyy" name="dor" id="dor" value=<%= p_user.dor %> required >
+           </div>
+        </div>  
+
+     
+      <!-- Cancel and Submit Button -->
+      <div class="form-group">
+        <div class="col-lg-offset-2" style="<%= offsetForCol2 %>">
+          <a onclick="submitFunc();" class="btn btn-primary calibriFont" style="padding-bottom : 10px ; margin-top : 10px;">
+            <i class="fa fa-check"></i> &nbsp; Save
+          </a>
+        </div>
+      </div>
+
+  </fieldset>
+</form>
+</div><!-- end of well bs-component -->
+</div><!-- end of col-lg-6 -->
+
+<script type="text/javascript">
+function submitFunc()
+{
+  document.getElementById('myform').submit();
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
