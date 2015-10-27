@@ -1,0 +1,151 @@
+<% if(p_proj.length !== 0) { %>
+
+<center><h3><b style="color:red">CUSTOMER PROJECT DETAILS OF <%=p_proj[0].custname %></b></h3></center>
+
+<br>
+<center><h4><b style="color:blue">PROJECT DETAILS</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Project Name</center></th>
+			<th><center>Project Type</center></th>			
+			<th><center>Description</center></th>
+			<th><center>Start Date</center></th>
+			<th><center>End Date</center></th>
+			<th><center>Address</center></th>
+			<th><center>Building Stage</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_proj.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_proj[i].projname %></center></td>
+				<td><center><%= p_proj[i].projtype %></center></td>
+				<td><center><%= p_proj[i].description %></center></td>
+				<td><center><%= p_proj[i].startdate %></center></td>
+				<td><center><%= p_proj[i].enddate %></center></td>
+				<td><center><%= p_proj[i].addr %></center></td>
+				<td><center><%= p_proj[i].buildstage %></center></td>
+
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+
+<button onclick="doCust(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
+<button onclick="doCust(2);" id="btnEdit" class="btn btn-primary"><i class="fa fa-edit"></i> &nbsp; Edit</button>
+
+<% } %>
+
+<br>
+
+<% if(p_requ.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">REQUIREMENT DETAILS</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Project Name</center></th>
+			<th><center>Requirement Type</center></th>			
+			<th><center>Status</center></th>
+			<th><center>Measurement</center></th>
+			<th><center>Approximate Value</center></th>
+			<th><center>Next Follow-up Date</center></th>
+			<th><center>Outside Purchase Reason</center></th>
+			<th><center>Bill Number</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_requ.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_requ[i].projname %></center></td>
+				<td><center><%= p_requ[i].reqtype %></center></td>
+				<td><center><%= p_requ[i].st %></center></td>
+				<td><center><%= p_requ[i].meas %></center></td>
+				<td><center><%= p_requ[i].av %></center></td>
+				<td><center><%= p_requ[i].nfudate %></center></td>
+				<td><center><%= p_requ[i].opr %></center></td>
+				<td><center><%= p_requ[i].bn %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+
+<% } %>
+
+<br>
+
+<% if(p_visit.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">VISIT DETAILS</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Project Name</center></th>
+			<th><center>Location</center></th>			
+			<th><center>Contact Number</center></th>
+			<th><center>Visit Type</center></th>
+			<th><center>Status</center></th>
+			<th><center>Next Follow-up Date</center></th>
+			<th><center>Sales Executive</center></th>
+			<th><center>Marketing Executive</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_visit.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_visit[i].projname %></center></td>
+				<td><center><%= p_visit[i].loc %></center></td>
+				<td><center><%= p_visit[i].contnum %></center></td>
+				<td><center><%= p_visit[i].vtype %></center></td>
+				<td><center><%= p_visit[i].st %></center></td>
+				<td><center><%= p_visit[i].nfudate %></center></td>
+				<td><center><%= p_visit[i].sexec %></center></td>
+				<td><center><%= p_visit[i].mexec %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+
+<% } %>
+
+<br>
+
+<% if(p_fp.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">FOLLOW-UP DETAILS</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Project Name</center></th>
+			<th><center>Follow-up Type</center></th>			
+			<th><center>Follow-up Date</center></th>
+			<th><center>Status</center></th>
+			<th><center>Remarks</center></th>
+			<th><center>Sales Executive</center></th>
+			<th><center>Marketing Executive</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_fp.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_fp[i].projname %></center></td>
+				<td><center><%= p_fp[i].ftype %></center></td>
+				<td><center><%= p_fp[i].fudate %></center></td>
+				<td><center><%= p_fp[i].st %></center></td>
+				<td><center><%= p_fp[i].rm %></center></td>
+				<td><center><%= p_fp[i].sexec %></center></td>
+				<td><center><%= p_fp[i].mexec %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>
+
+<% } %>

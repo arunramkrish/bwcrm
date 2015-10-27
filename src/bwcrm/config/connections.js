@@ -16,7 +16,7 @@
  * (this is to prevent you inadvertently sensitive credentials up to your repository.)
  *
  * For more information on configuration, check out:
- * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.connections.html
+ * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.connections.html
  */
 
 module.exports.connections = {
@@ -40,13 +40,13 @@ module.exports.connections = {
   * Run: npm install sails-mysql                                             *
   *                                                                          *
   ***************************************************************************/
-  /*MySQL: {
+  someMysqlServer: {
     adapter: 'sails-mysql',
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'x360cbsDB'
-  },*/
+    host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
+    user: 'YOUR_MYSQL_USER',
+    password: 'YOUR_MYSQL_PASSWORD',
+    database: 'YOUR_MYSQL_DB'
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -56,13 +56,13 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
-  mongoDb : {
+  mongoDB: {
     adapter: 'sails-mongo',
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 27017,
-    user: '',
-    password: '',
-    database: 'bwcrm1'
+    // user: 'username',
+    // password: 'password',
+    database: 'bwcrmnewDB'
   },
 
   /***************************************************************************
@@ -74,24 +74,14 @@ module.exports.connections = {
   *                                                                          *
   *                                                                          *
   ***************************************************************************/
-  /*somePostgresqlServer: {
+  somePostgresqlServer: {
     adapter: 'sails-postgresql',
     host: 'YOUR_POSTGRES_SERVER_HOSTNAME_OR_IP_ADDRESS',
     user: 'YOUR_POSTGRES_USER',
     password: 'YOUR_POSTGRES_PASSWORD',
     database: 'YOUR_POSTGRES_DB'
-  } ,
+  }
 
-  sqlserver: {
-    adapter: 'sails-sqlserver',
-    user: 'scriptnull@bb789i8sqs',
-    password: 'Gameboy4',
-    host: 'tcp:bb789i8sqs.database.windows.net' , // azure database
-    database: 'x360cbsAFyoFXqps',
-    options: {
-      encrypt: true   // use this for Azure databases
-    }
-  }  
 
   /***************************************************************************
   *                                                                          *

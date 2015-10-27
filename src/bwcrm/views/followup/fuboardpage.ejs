@@ -1,0 +1,170 @@
+<center><h3><b style="color:red">FOLLOW-UPS</b></h3></center>
+<table id="futable"></table>
+<br />
+<center>
+
+<button onclick="doreq(2);" id="btnEdit" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+<button onclick="doreq(3);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+<button onclick="doreq(4);" id="btnalog" class="btn btn-primary" disabled><i class="fa fa-plus"></i> &nbsp; Add action</button>
+</center>
+<script>
+    <% if( query !== undefined ){
+        if( query.localeCompare('added') === 0 ) { %>
+            alertify.success('<i class="fa fa-plus"></i> &nbsp; Follow-up Added');
+        <% }
+        else if(query.localeCompare('updated') === 0 ) { %>
+            alertify.success('<i class="fa fa-pencil"></i> &nbsp; Follow-up Updated');  
+        <% }
+    } %>
+</script>
+<script>
+    function doreq(a){
+    	 if ( a === 2){
+            var selectedRows =  $('#futable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/fuedit?id=" + selectedRow.id);
+            window.location = uri ;
+    	}
+        else if (a == 3){
+            alertify.confirm("Delete Followup ?", function (e) {
+                if (e) {
+                    var selectedRows =  $('#futable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];     
+                    $.get('/deletefu' , { id : selectedRow.id }).done(function(data){
+                        console.log(data);
+                        if(data.status !== undefined ){
+                            alertify.success('<i class="fa fa-trash"></i> &nbsp; Followup Deleted');
+                            $('#futable').bootstrapTable('refresh' , { url : '/listfu'} );
+                        }
+                    });
+                }
+          
+
+            }); 
+    	}
+        else
+        {
+            var selectedRows =  $('#futable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/fualogadd?id=" + selectedRow.id);
+            window.location = uri ;
+        } 
+        
+       
+    }
+    $(function () {
+        $('#futable').bootstrapTable({
+            method: 'get',
+            url: '/listfu',
+            cache: false,
+            height: 500,
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+            onCheck : function(row){
+            	document.getElementById('btnEdit').disabled = false ;
+                document.getElementById('btnDelete').disabled = false ; 
+                document.getElementById('btnalog').disabled = false ;
+                } ,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false                 
+            } ,
+
+             {
+                field: 'salesexec',
+                title: 'Sales Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'markexec',
+                title: 'Marketing Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+             {
+                field: 'custname',
+                title: 'Customer Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+           {
+                field: 'projname',
+                title: 'Project Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             
+           {
+                field: 'ftype',
+                title: 'Follow-up type',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+            {
+                field: 'fudate',
+                title: 'Follow-up date',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+             {
+                field: 'st',
+                title: 'Status',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             {
+                field: 'rm',
+                title: 'Remarks',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             {
+                field: 'sexec',
+                title: 'Sales Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'mexec',
+                title: 'Marketing Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } 
+             
+           
+            
+            ]
+        });
+    });
+</script>

@@ -1,0 +1,132 @@
+        <!-- Text --> 
+
+        <!-- {{viewify_name}} -->
+        <div class="form-group">
+          <label for="{{name}}" class="col-lg-2 control-label">{{viewify_name}}</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" name="{{name}}" id="{{name}}" required>
+          </div>
+        </div>
+
+        <!-- Number -->
+
+        <!-- {{viewify_name}} -->
+        <div class="form-group">
+          <label for="{{name}}" class="col-lg-2 control-label">{{viewify_name}}</label>
+          <div class="col-lg-10">
+            <input type="number" class="form-control" name="{{name}}" id="{{name}}" required>
+          </div>
+        </div>
+
+        <!-- Email --> 
+        <!-- {{viewify_name}} -->
+        <div class="form-group">
+          <label for="{{name}}" class="col-lg-2 control-label">{{viewify_name}}</label>
+          <div class="col-lg-10">
+            <input type="email" class="form-control" name="{{name}}" id="{{name}}" required>
+          </div>
+        </div>        
+
+        <!-- Date -->
+
+        <!-- {{viewify_name}} -->
+	    <div class="form-group">
+	      <label for="{{name}}" class="col-lg-2 control-label">{{viewify_name}}</label>
+	      <div class="col-lg-10">
+	    		<input class="form-control datepicker" type="text" placeholder="dd/mm/yyyy" name="{{name}}" id="{{name}}">
+	       </div>
+    	</div>        
+
+
+      <!-- Form --> 
+      <div class="col-lg-6 col-lg-offset-3">
+        <div class="well bs-component">
+          <form class="form-horizontal myform" method="post" action="/">
+            
+            <!-- save button -->
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-3">
+                <input type="submit" class="btn btn-primary" value="Save" />
+              </div>
+            </div>              
+          </form>
+        </div>
+      </div>
+
+
+        <!--Panel --> 
+        <div class="col-lg-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading"><strong>Basic Details</strong></div>
+              <div class="panel-body">
+                              
+              </div>
+          </div>
+        </div>
+
+<!--  --> 
+<div class="panel panel-primary">
+  <div class="panel-heading"><strong> Details</strong></div>
+  <div class="panel-body">
+
+  </div>
+</div>
+
+
+        <!-- {{viewify_name}} -->
+        <div class="form-group">
+          <label for="{{name}}" class="col-lg-2 control-label">{{viewify_name}}</label>
+          <div class="col-lg-10">
+            <input class="form-control datepicker" type="text" placeholder="mm-dd-yyyy" name="{{name}}" id="{{name}}">
+           </div>
+        </div> 
+        
+        <script type="text/javascript">
+        $(function(){
+          $('.datepicker').datepicker({
+            format: 'mm-dd-yyyy'
+          });
+        });
+        </script>
+
+
+
+
+      <!-- Cancel and Submit Button -->
+      <div class="form-group">
+        <div class="col-lg-offset-2" style="<%= offsetForCol2 %> margin-top : 10px;">
+          <a onclick="submitFunc();" class="btn btn-primary calibriFont" style="padding-bottom : 10px margin-top : 10px;">
+            <i class="fa fa-check"></i> &nbsp; Save
+          </a>
+        </div>
+      </div>
+      <script type="text/javascript">
+      function submitFunc()
+      {
+        document.getElementById('myform').submit();
+      }
+    </script>
+
+
+         <% var labelColClass = 'col-lg-2 calibriFont' %>
+         <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+         <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+         <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+         <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+         <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+         <% var formGroup = ' margin-bottom : 2px; ' %>  
+
+
+         <textarea style="height : 60px;" class="form-control textboxes"    
+
+
+      <div class="form-group" style=" margin-bottom : 2px; ">
+          <label style="<%= labelSpaceWidth%>" for="role" class="<%= labelColClass %>">Role</label>
+          <div class="<%= textBoxColClass %> calibriFont">
+            <select     name="role" id="role" required>
+                    <% for(var i=0 ; i< roles.length ; i++) { %>
+                        <option value=<%= roles[i].id %>><%= roles[i].title %></option>
+                    <% } %>
+            </select>
+        </div>
+      </div>    

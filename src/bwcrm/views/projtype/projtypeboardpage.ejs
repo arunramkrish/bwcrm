@@ -1,0 +1,182 @@
+<legend>&nbsp;&nbsp;Project Details</legend>
+<table id="projtypetable"></table>
+
+<br />
+
+<center>
+<button class="btn btn-success" data-toggle="modal" data-target="#AddProjTypeModal"><i class="fa fa-plus"></i> &nbsp; Add</button>
+
+<button onclick="doProjType(1);"  id="btnEdit" class="btn btn-primary" disabled ><i class="fa fa-edit"></i> &nbsp; Edit</button>
+
+<button onclick="doProjType(2);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+</center>
+
+<script>
+    <% if( query !== undefined ){
+        if( query.localeCompare('added') === 0 ) { %>
+            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Project Type Added');
+        <% }
+        else if(query.localeCompare('updated') === 0 ) { %>
+            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Project Type Updated');  
+        <% }  
+        else if(query.localeCompare('alreadythere') === 0 ) { %>
+            alertify.error('<i class="fa fa-thumbs-down"></i> &nbsp; Project Type Exists');  
+        <% }               
+    } %>
+</script>
+
+<script>
+
+    $(function () {
+       $('#projtypetable').bootstrapTable({
+            method: 'get',
+            url: '/listprojtypes',
+            cache: false,
+            height: 450,
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+            onCheck : function(row){
+                document.getElementById('btnEdit').disabled = false ;
+                document.getElementById('btnDelete').disabled = false ;
+            } ,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'projtype',
+                title: 'Project Type',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            }  
+
+            ]
+
+        });
+
+    });
+
+</script>
+
+<script>
+
+    function doProjType(a){
+
+        if(a === 1){
+            var selectedRows =  $('#projtypetable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var d = document.getElementById('EditProjTypeModalForm');
+
+            $("#pid").val(selectedRow.id);
+            $("#pprojtype").val(selectedRow.projtype);
+            $('#EditProjTypeModal').modal('show');
+        }
+
+        else if(a === 2){
+
+            alertify.confirm("Delete Project Type ?", function (e) {
+                if (e) {
+                    var selectedRows =  $('#projtypetable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];     
+                    $.get('/deleteprojtype' , { id : selectedRow.id }).done(function(data){
+                        console.log(data);
+                        if(data.status !== undefined ){
+                            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Project Type Deleted');
+                            $('#projtypetable').bootstrapTable('refresh' , { url : '/listprojtypes'} );
+                        }
+                    });
+                } else {
+
+                }
+            }); 
+
+        }    
+    	
+    }
+
+</script>
+
+<div class="modal fade" id="AddProjTypeModal" tabindex="-1" role="dialog" aria-labelledby="Add Project Type" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Project Type</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="AddProjTypeModalForm" method="post" class="form-horizontal" action="\projtypeadd">
+                    <div class="form-group">
+                        <label class="col-xs-4">Project Type Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="projtype" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="EditProjTypeModal" tabindex="-1" role="dialog" aria-labelledby="Edit Project Type" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Project Type</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="EditProjTypeModalForm" method="post" class="form-horizontal" action="\projtypeupdate">
+                    <div class="form-group">
+                        <input type="hidden" name="pid" id="pid"/>
+                        <label class="col-xs-3">Project Type Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="pprojtype"  id="pprojtype"  size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button onclick="submitFunc()" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function submitFunc()
+    {
+        document.getElementById('EditProjTypeModalForm').submit();
+    }
+</script>

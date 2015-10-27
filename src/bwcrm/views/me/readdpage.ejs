@@ -1,0 +1,180 @@
+<% 
+  if( query !== undefined ){
+    if( query.localeCompare('changeexec') === 0 ) { %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> Report contains  wrong entries.
+      </div> 
+    <% }
+} %>
+<div class="col-lg-12 calibriFont">
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/readd">
+      <fieldset>
+        <legend>Customer Details</legend>
+        <% if( query !== undefined ){
+          if( query.localeCompare('alreadythere') === 0 ) { %>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Warning!</strong>Duplicate report entry
+            </div> 
+          <% }
+        } %>
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var formGroup = ' margin-bottom : 2px; ' %>
+
+
+        <!-- Customer Name -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="custname" >Customer Name</label>
+          <div class="<%= textBoxColClass %>">
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" required title="Customer Name">
+          </div>
+        </div>
+        
+        <!--Company  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="company" class="<%= labelColClass %>">Company</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="company" id="company"  required title="company">
+          </div>
+        </div>
+         
+         <!--Designation  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="design" class="<%= labelColClass %>">Designation</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="design" id="design"  required title="designation">
+          </div>
+        </div>
+
+         <!--Contact number  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="cnum" class="<%= labelColClass %>">Contact number</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="cnum" id="cnum"  required title="contact num">
+          </div>
+        </div>
+             
+
+        <!-- Address -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="addr" class="<%= labelColClass %>">Address(Last line only)</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="addr" id="addr" required title="Address"> 
+          </div>
+        </div>  
+
+         <!--Building stage -->
+          <div class="form-group" style=" margin-bottom : 2px; ">
+          <label style="<%= labelSpaceWidth%>" for="bs" class="<%= labelColClass %>">Building stage</label>
+          <div class="<%= textBoxColClass %> calibriFont">
+            <select style="<%= selectBoxStyle %>"  name="bs" id="bs" >
+                    <option>Plastering</option>
+                    <option>Plumbing</option>
+                    <option>Concrete over</option>
+                    <option>Brick work</option>
+                     <option>Basement</option>
+            </select>
+        </div>
+      </div>         
+      
+        <!--Usage -->
+          <div class="form-group" style=" margin-bottom : 2px; ">
+          <label style="<%= labelSpaceWidth%>" for="usg" class="<%= labelColClass %>">Usage</label>
+          <div class="<%= textBoxColClass %> calibriFont">
+            <select style="<%= selectBoxStyle %>"  name="usg" id="usg" >
+                    <option>Factory</option>
+                    <option>Institution</option>
+                    <option>House</option>
+                    <option>Apartment</option>
+                     <option>Hospital</option>
+            </select>
+        </div>
+      </div>  
+       <!--Call type -->
+          <div class="form-group" style=" margin-bottom : 2px; ">
+          <label style="<%= labelSpaceWidth%>" for="ct" class="<%= labelColClass %>">Call type</label>
+          <div class="<%= textBoxColClass %> calibriFont">
+            <select style="<%= selectBoxStyle %>"  name="ct" id="ct" >
+                    <option>New Call</option>
+                    <option>Follow up</option>
+                    <option>Measurement</option>
+                    <option>Payment</option>
+                     <option>Complaint</option>
+            </select>
+        </div>
+      </div>                
+
+        <!--Status -->
+          <div class="form-group" style=" margin-bottom : 2px; ">
+          <label style="<%= labelSpaceWidth%>" for="st" class="<%= labelColClass %>">Status</label>
+          <div class="<%= textBoxColClass %> calibriFont">
+            <select style="<%= selectBoxStyle %>"  name="st" id="st" >
+                    <option>Prospect</option>
+                    <option>Showroom visit</option>
+                    <option>Quotation given</option>
+                    <option>Advanced</option>
+                     <option>Billed</option>
+                      <option>Outside purchase</option>
+            </select>
+        </div>
+      </div> 
+
+      <!-- Show room Salesman -->
+        <div class="form-group" style=" margin-bottom : 2px; ">
+            <label style="<%= labelSpaceWidth%>" for="srs" class="<%= labelColClass %>">Show room Salesman</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+              <select style="<%= selectBoxStyle %>"  name="srs" id="srs" required title="Salesman">
+                      <option>Select showroom Salesman</option>              
+                      <% for(var i=0 ; i< suser.length ; i++) { %>
+                          <option value=<%= suser[i].id %>><%= suser[i].ename %></option>
+                      <% } %>
+              </select>
+          </div>
+        </div>  
+        <!-- Remainder -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="remain" class="<%= labelColClass %>">Remainder</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="remain" id="remain" required title="Remainder"> 
+          </div>
+        </div>  
+
+        <!--Floor -->
+          <div class="form-group" style=" margin-bottom : 2px; ">
+          <label style="<%= labelSpaceWidth%>" for="fl" class="<%= labelColClass %>">Floor</label>
+          <div class="<%= textBoxColClass %> calibriFont">
+            <select style="<%= selectBoxStyle %>"  name="fl" id="fl" >
+                    <option>Tiles</option>
+                    <option>Granite</option>
+                    <option>Italian marble</option>
+            </select>
+        </div>
+      </div> 
+
+        <!-- Floor area -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="fa" class="<%= labelColClass %>">Remainder</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="remain" id="remain" required title="Remainder"> 
+          </div>
+        </div>  
+
+
+
+        <!-- Save button -->
+        <div class="form-group" style="<%= formGroup %>">
+          <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
+            <input type="submit" class="btn btn-primary" value="Save" />
+          </div>
+        </div> 
+      </fieldset>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<center><h3><b style="color:red">PROJECT - VISIT DETAIL</b></h3></center><br>
+
+
+<div >
+    <div id="proj">
+        <div class="col-lg-12 calibriFont" style="bgcolor:white">
+          <div class="well bs-component">
+        <legend>Projects List</legend>
+        <table id="projtable"></table>
+        <br/>
+        
+       
+      
+        <script>
+            $(function () {
+                $('#projtable').bootstrapTable({
+                    method: 'get',
+                    url: encodeURI('/listcustproj?id=' + '<%= p_cust.id.toString() %>'),
+                    cache: false,
+                    height: 500,
+                    striped: false ,
+                    pagination: false,
+                    search: true,
+                    showRefresh: true,        
+                    clickToSelect: true,
+                    onCheck : function(row){
+                        document.getElementById('btnEdit').disabled = false ;
+                                           
+                    } ,
+                    columns: [{
+                        field: 'state',
+                        radio : true
+                    } , 
+
+                    {
+                        field: 'id',
+                        title: 'Id',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false 
+                    } ,
+
+                    {
+                        field: 'projname',
+                        title: 'Project Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'projtype',
+                        title: 'Project Type',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } , 
+
+                    {
+                        field: 'description',
+                        title: 'Description',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'startdate',
+                        title: 'Start Date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'enddate',
+                        title: 'End Date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,                
+
+                    {
+                        field: 'addr',
+                        title: 'Address',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'buildstage',
+                        title: 'Building Stage',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } 
+
+                    ]
+                });
+            });
+        </script>
+
+
+          </div>
+        </div>
+    </div>
+
+    
+<div id="req" >
+        <div class="col-lg-12 calibriFont">
+          <div class="well bs-component">
+        <legend>Requirements List</legend>
+        <table id="reqtable"></table>
+        <br />
+        <script>
+            $(function () {
+                    var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+                     var selectedRow = selectedRows[0];
+                $('#reqtable').bootstrapTable({
+                    method: 'get',
+                    url: encodeURI('/listprojreq?id=' + selectedRow.id )
+                    cache: false,
+                    height: 300,
+                    striped: false ,
+                    pagination: false,
+                    search: true,
+                    showRefresh: true,
+                    clickToSelect: true,
+
+                    columns: [{
+                        field: 'state',
+                        radio : true
+                    } , 
+
+                    {
+                        field: 'id',
+                        title: 'Id',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false                 
+                    } ,
+                 
+                    {
+                        field: 'projname',
+                        title: 'Project Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'reqtype',
+                        title: 'Requirement type',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    
+                     {
+                        field: 'measureqty',
+                        title: 'Measurement',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                     {
+                        field: 'approx',
+                        title: 'Approximate value',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                     {
+                        field: 'reqdate',
+                        title: 'Required date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                     {
+                        field: 'remarks',
+                        title: 'Remarks',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                    
+
+                    ]
+                });
+            });
+        </script>
+
+
+          </div>
+        </div>
+    </div>
+               
+   </script>
+ 

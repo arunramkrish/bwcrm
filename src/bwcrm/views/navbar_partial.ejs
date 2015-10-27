@@ -1,5 +1,4 @@
-    
-  <div class="navbar navbar-default">
+<div class="navbar navbar-default">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
       <span class="icon-bar"></span>
@@ -7,43 +6,128 @@
       <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="/" style="padding:0px;">
-      <img src="/images/bw.png" style="height:50px;"/>
-      <!-- style=" height : 30px ; width :60px;"> -->
-      <!--<p style="font-family: sans-serif"><b>Beauty Wares</b></p>-->
+      <a href="/dashboard"><img src="/images/bw.png" style="height:50px;"></a>
     </a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
-    <ul class="nav navbar-nav">      
-      <!-- <li><a href="#">Link</a></li> -->
+    <ul class="nav navbar-nav navbar-right">            
       
-      <!-- User management -->
+      <% if((req.session.currentrole.master[0]) || (req.session.currentrole.master[1]) || (req.session.currentrole.master[2]) || (req.session.currentrole.master[3])){%>
+      <!-- Master Management -->
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Management
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MASTER
         <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="/roleboard">Roles</a></li>
-          <li><a href="/userboard">Users</a></li>
+          <% if(req.session.currentrole.master[0]){%>
+          <li><a href="/conttypeboard">Contact Type</a></li>          
+          <%}%>
+          <% if(req.session.currentrole.master[1]){%>
+          <li><a href="/pdttypeboard">Product Type</a></li>
+          <%}%>
+          <% if(req.session.currentrole.master[2]){%>
+          <li><a href="/projtypeboard">Project Type</a></li>   
+          <%}%>
+          <% if(req.session.currentrole.master[3]){%>
+          <li><a href="/statustypeboard">Status Type</a></li>
+          <%}%>
         </ul>
       </li>
-                
-      <!-- Reports -->
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports
-        <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="/clients/sc/report">List of follow ups/user</a></li>
-          <li><a href="/clients/sc/report-full">Report on customers requirement</a></li>
-          <li><a href="/clients/sc/report">Number of calls</a></li>
-          <li><a href="/clients/sc/report">Number of offers made</a></li>
-        </ul>
-      </li>
-          
-    </ul>    
+      <%}%>  
 
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="/logout">Log Out</a></li>
-     </ul>
+      <% if((req.session.currentrole.usermanagement[0]) || (req.session.currentrole.usermanagement[1])){%>
+      <!-- Role & User Management -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">USER MANAGEMENT
+        <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+        <% if(req.session.currentrole.usermanagement[0]){%>
+          <li><a href="/roleboard">Roles</a></li>
+          <%}%>    
+          <% if(req.session.currentrole.usermanagement[1]){%>      
+          <li><a href="/userboard">Users</a></li>          
+          <%}%>    
+        </ul>
+      </li>
+      <%}%>   
+      
+      <% if((req.session.currentrole.customer[0]) || (req.session.currentrole.customer[1])){%>
+      <!-- Customer Management -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CUSTOMER
+        <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <% if(req.session.currentrole.customer[0]){%>
+          <li><a href="/custboard">Customers</a></li>
+          <%}%>
+          <% if(req.session.currentrole.customer[1]){%>
+          <li><a href="/custsearchpage">Search Customers</a></li>
+          <%}%>
+        </ul>
+      </li>
+      <%}%>  
+     
+      <% if((req.session.currentrole.project[0]) || (req.session.currentrole.project[1]) || (req.session.currentrole.project[2]) || (req.session.currentrole.project[3]) || (req.session.currentrole.project[4])){%>
+      <!-- Project Management -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROJECT
+        <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <% if(req.session.currentrole.project[0]){%>
+          <li><a href="/projboard">Projects</a></li>
+          <%}%>
+          <% if(req.session.currentrole.project[1]){%>
+          <li><a href="/reqboard">Requirements</a></li>
+          <%}%>
+          <% if(req.session.currentrole.project[2]){%>
+          <li><a href="/visitboard">Visits</a></li>
+          <%}%>
+          <% if(req.session.currentrole.project[3]){%>
+          <li><a href="/fuboard">Follow-ups</a></li>
+          <%}%>
+          <% if(req.session.currentrole.project[4]){%>
+          <li><a href="/fualogboard">Follow -up action logs</a></li>
+          <%}%>
+        </ul>
+      </li> 
+      <%}%>  
+
+      <% if((req.session.currentrole.report[0]) || (req.session.currentrole.report[1])){%>
+      <!-- Report Management -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORT
+        <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <% if(req.session.currentrole.report[0]){%>        
+          <li><a href="/report/requirement">Requirement</a></li>
+          <%}%>
+          <% if(req.session.currentrole.report[1]){%>
+          <li><a href="/report/searchreqdate">Requirement by Date</a></li>                              
+          <%}%>
+        </ul>
+      </li>  
+      <%}%>  
+
+    <% if((req.session.currentrole.contact[0])){%>
+     <!-- Contacts Management -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONTACTS
+        <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <% if(req.session.currentrole.contact[0]){%>
+          <li><a href="/vendorboard">Contact</a></li>          
+          <%}%>
+        </ul>
+      </li>   
+      <%}%>  
+
+      <li><a href="/logout">LOG OUT</a></li>
+
+    </ul>
   </div>
 </div>

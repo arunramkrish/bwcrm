@@ -1,0 +1,117 @@
+<div class="col-lg-12">
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/custupdate">
+      <fieldset>
+        <legend>Customer Details</legend>
+        <% if( query !== undefined ){
+          if( query.localeCompare('alreadythere') === 0 ) { %>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Warning!</strong> Customer already present.
+            </div> 
+          <% }
+        } %>
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var formGroup = ' margin-bottom : 2px; ' %>
+
+      <!-- Customer ID -->
+        <div class="form-group" style="<%= formGroup %>">
+          <input type="hidden" name="cid" value=<%= p_cust.cid %> />
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="cid" >Customer ID</label>
+          <div class="<%= textBoxColClass %>">
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="cid" id="cid" required value=<%=p_cust.cid %> required readonly >
+          </div>
+        </div>
+
+       
+
+
+        <!-- Created Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="createdAt" class="<%= labelColClass %>">Created At (mm/dd/yyyy)</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" style="padding-left: 5px; height : 30px ; align : left" name="createdAt" id="createdAt" value=<%=p_cust.createdAt %>  required readonly>
+          </div>
+        </div> 
+
+        <!-- Updated Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="updatedAt" class="<%= labelColClass %>">Updated Date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" style="padding-left: 5px; height : 30px ; align : left" name="updatedAt" id="updatedAt" value=<%=p_cust.updatedAt%> required readonly>
+          </div>
+        </div>
+
+
+        <!-- Customer Name -->
+        <div class="form-group" style="<%= formGroup %>">
+          <input type="hidden" name="id" value=<%= p_cust.id %> />
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="custname" >Customer Name</label>
+          <div class="<%= textBoxColClass %>">
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" required value=<%=p_cust.custname %> >
+          </div>
+        </div>
+        <!-- Phone Number  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="phnum" class="<%= labelColClass %>">Phone Number</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="phnum" id="phnum"  value=<%=p_cust.phnum %> >
+          </div>
+        </div>
+        <!-- Address  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="addr" class="<%= labelColClass %>">Address</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="addr" id="addr"  value=<%=p_cust.addr %> >
+          </div>
+        </div>
+        <!-- Locality -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="locality" class="<%= labelColClass %>">Locality</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="locality" id="locality" value=<%=p_cust.locality%>>
+          </div>
+        </div>      
+        <!-- PIN Code -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="pincode" class="<%= labelColClass %>">PIN Code</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="pincode" id="pincode" value=<%=p_cust.pincode%>>
+          </div>
+        </div>
+        <!-- Sales Executive -->
+        <% if(p_cust.salesexec != undefined) { %>
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="salesexec" class="<%= labelColClass %>">Sales Executive</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="salesexec" id="salesexec" value=<%=p_cust.sexec%>  required readonly>
+          </div>
+        </div>
+        <% } %>
+        <!-- Marketing Executive -->
+        <% if(p_cust.markexec != undefined) { %>
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="markexec" class="<%= labelColClass %>">Marketing Executive</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="markexec" id="markexec" value=<%=p_cust.mexec%>  required readonly>
+          </div>
+        </div>
+
+       
+
+        <% } %>
+        <!-- Update Button -->
+        <div class="form-group" style="<%= formGroup %>">
+          <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
+            <input type="submit" class="btn btn-primary" value="Update" />
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

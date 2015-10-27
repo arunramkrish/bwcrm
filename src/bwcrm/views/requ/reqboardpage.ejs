@@ -1,0 +1,148 @@
+<center><h3><b style="color:red">REQUIREMENTS</b></h3></center>
+<table id="reqtable"></table>
+<br />
+<center>
+
+<button onclick="doreq(2);" id="btnEdit" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+<button onclick="doreq(3);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+</center>
+<script>
+    <% if( query !== undefined ){
+        if( query.localeCompare('added') === 0 ) { %>
+            alertify.success('<i class="fa fa-plus"></i> &nbsp; Requirement Added');
+        <% }
+        else if(query.localeCompare('updated') === 0 ) { %>
+            alertify.success('<i class="fa fa-pencil"></i> &nbsp; Requirement Updated');  
+        <% }
+    } %>
+</script>
+<script>
+    function doreq(a){
+    	 if ( a === 2){
+            var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/reqedit?id=" + selectedRow.id);
+            window.location = uri ;
+    	}
+        else if (a == 3){
+            alertify.confirm("Delete Requirement ?", function (e) {
+                if (e) {
+                    var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];     
+                    $.get('/deletereq' , { id : selectedRow.id }).done(function(data){
+                        console.log(data);
+                        if(data.status !== undefined ){
+                            alertify.success('<i class="fa fa-trash"></i> &nbsp; Requirement Deleted');
+                            $('#reqtable').bootstrapTable('refresh' , { url : '/listreq'} );
+                        }
+                    });
+                }
+
+
+            }); 
+    	} 
+        
+       
+    }
+    $(function () {
+        $('#reqtable').bootstrapTable({
+            method: 'get',
+            url: '/listreq',
+            cache: false,
+            height: 500,
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+            onCheck : function(row){
+            	document.getElementById('btnEdit').disabled = false ;
+                document.getElementById('btnDelete').disabled = false ; 
+                } ,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false                 
+            } ,
+         
+
+             {
+                field: 'custname',
+                title: 'Customer Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+           {
+                field: 'projname',
+                title: 'Project Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+            {
+                field: 'reqtype',
+                title: 'Requirement type',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+             {
+                field: 'st',
+                title: 'Status',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             {
+                field: 'meas',
+                title: 'Measurement',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             {
+                field: 'av',
+                title: 'Approximate value',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             {
+                field: 'nfudate',
+                title: 'Next follow-up date',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             {
+                field: 'opr',
+                title: 'outside purchase reason',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+             {
+                field: 'bn',
+                title: 'Bill number',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } 
+
+            ]
+        });
+    });
+</script>

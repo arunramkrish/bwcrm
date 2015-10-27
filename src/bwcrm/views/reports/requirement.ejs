@@ -1,0 +1,183 @@
+<center><h3><b style="color:red">REQUIREMENT DETAILS</b></h3></center>
+
+<% if(p_fp.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">FOLLOW-UP</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Customer Name</center></th>
+			<th><center>Project Name</center></th>
+			<th><center>Approximate Value</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_fp.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_fp[i].custname %></center></td>
+				<td><center><%= p_fp[i].projname %></center></td>
+				<td><center><%= p_fp[i].av %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="2" style="text-align:right; padding:10px;">Total</th>
+			<th style="color:magenta"><center><%= p_fp.reduce(function ( p , c, i , a ){
+				var obj = new Object();
+				obj.av =  p.av + c.av ;
+				return obj;
+			}).av %></center></th>						
+		</tr>
+	</tfoot>
+</table>
+
+<% } %>
+
+<% if (p_bill.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">BILLED</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Customer Name</center></th>
+			<th><center>Project Name</center></th>
+			<th><center>Approximate Value</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_bill.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_bill[i].custname %></center></td>
+				<td><center><%= p_bill[i].projname %></center></td>
+				<td><center><%= p_bill[i].av %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="2" style="text-align:right; padding:10px;">Total</th>
+			<th style="color:magenta"><center><%= p_bill.reduce(function ( p , c, i , a ){
+				var obj = new Object();
+				obj.av =  p.av + c.av ;
+				return obj;
+			}).av %></center></th>
+		</tr>
+	</tfoot>
+</table>
+
+<% } %>
+
+<% if (p_outpur.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">OUTSIDE PURCHASE</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Customer Name</center></th>
+			<th><center>Project Name</center></th>
+			<th><center>Approximate Value</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_outpur.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_outpur[i].custname %></center></td>
+				<td><center><%= p_outpur[i].projname %></center></td>
+				<td><center><%= p_outpur[i].av %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="2" style="text-align:right; padding:10px;">Total</th>
+			<th style="color:magenta"><center><%= p_outpur.reduce(function ( p , c, i , a ){
+				var obj = new Object();
+				obj.av =  p.av + c.av ;
+				return obj;
+			}).av %></center></th>
+		</tr>
+	</tfoot>
+</table>
+
+<% } %>
+
+<% if(p_notreq.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">NOT REQUIRED</b><h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Customer Name</center></th>
+			<th><center>Project Name</center></th>
+			<th><center>Approximate Value</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_notreq.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_notreq[i].custname %></center></td>
+				<td><center><%= p_notreq[i].projname %></center></td>
+				<td><center><%= p_notreq[i].av %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="2" style="text-align:right; padding:10px;">Total</th>
+			<th style="color:magenta"><center><%= p_notreq.reduce(function ( p , c, i , a ){
+				var obj = new Object();
+				obj.av =  p.av + c.av ;
+				return obj;
+			}).av %></center></th>
+		</tr>
+	</tfoot>
+</table>
+
+<% } %>
+
+<% if (p_quote.length !== 0) { %>
+
+<br>
+<center><h4><b style="color:blue">QUOTATION GIVEN</b></h4></center>
+
+<table style="width : 90%;" class="bor">
+	<thead>
+		<tr>
+			<th style="padding:10px;"><center>Customer Name</center></th>
+			<th><center>Project Name</center></th>
+			<th><center>Approximate Value</center></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i = 0 ; i < p_quote.length ; i++){ %>
+			<tr>
+				<td style="padding:10px;"><center><%= p_quote[i].custname %></center></td>
+				<td><center><%= p_quote[i].projname %></center></td>
+				<td><center><%= p_quote[i].av %></center></td>
+			</tr>
+		<% } %>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="2" style="text-align:right; padding:10px;">Total</th>
+			<th style="color:magenta"><center><%= p_quote.reduce(function ( p , c, i , a ){
+				var obj = new Object();
+				obj.av =  p.av + c.av ;
+				return obj;
+			}).av %></center></th>
+		</tr>
+	</tfoot>
+</table>
+
+<% } %>
+
+<br>

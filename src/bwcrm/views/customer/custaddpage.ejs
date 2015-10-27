@@ -1,0 +1,147 @@
+<% 
+  if( query !== undefined ){
+    if( query.localeCompare('changeexec') === 0 ) { %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> Select either sales executive or marketing executive.
+      </div> 
+    <% }
+} %>
+
+<div class="col-lg-12 calibriFont">
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/custadd">
+      <fieldset>
+        <legend>Add Customer</legend>
+
+        <% if( query !== undefined ){
+          if( query.localeCompare('alreadythere') === 0 ) { %>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Warning!</strong> Customer already present.
+            </div> 
+          <% }
+        } %>
+
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var formGroup = ' margin-bottom : 2px; ' %>
+
+        <!-- Customer Name -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="custname" >Customer Name</label>
+          <div class="<%= textBoxColClass %>">
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" required title="Customer Name">
+          </div>
+        </div>
+
+        <!-- Customer Type -->
+        <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" for="custtype" class="<%= labelColClass %>">Customer Type</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+                <select style="<%= selectBoxStyle %>" name="custtype" id="custtype" >
+                  <option>Retail</option>
+                  <option>Company</option>
+                </select>
+            </div>
+        </div>   
+
+        <!-- Phone Number  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="phnum" class="<%= labelColClass %>">Phone Number</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="phnum" id="phnum"  required title="Phone Number">
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="addr" class="<%= labelColClass %>">Address</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="addr" id="addr" required title="Address"> 
+          </div>
+        </div>  
+
+        <!-- Locality -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="locality" class="<%= labelColClass %>">Locality</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="locality" id="locality" required title="Locality">
+          </div>
+        </div>    
+
+        <!-- PIN Code -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="pincode" class="<%= labelColClass %>">PIN Code</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="pincode" id="pincode" required title="PIN">
+          </div>
+        </div>
+
+        <!-- Sales Executive -->
+        <div class="form-group" style=" margin-bottom : 2px; ">
+            <label style="<%= labelSpaceWidth%>" for="salesexec" class="<%= labelColClass %>">Sales Executive</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+              <select style="<%= selectBoxStyle %>"  name="salesexec" id="salesexec" >
+                      <option>Select Sales Executive</option>              
+                      <% for(var i=0 ; i< suser.length ; i++) { %>
+                          <option value=<%= suser[i].id %>><%= suser[i].ename %></option>
+                      <% } %>
+              </select>
+          </div>
+        </div> 
+
+        <!-- Marketing Executive -->
+        <div class="form-group" style=" margin-bottom : 2px; ">
+            <label style="<%= labelSpaceWidth%>" for="markexec" class="<%= labelColClass %>">Marketing Executive</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+              <select style="<%= selectBoxStyle %>"  name="markexec" id="markexec" >
+                      <option>Select Marketing Executive</option>
+                      <% for(var i=0; i<muser.length ; i++) { %>
+                          <option value=<%= muser[i].id %>><%= muser[i].ename %></option>
+                      <% } %>
+              </select>
+          </div>
+        </div> 
+
+        <!-- Save button -->
+        <!-- class="form-group" style="<%= formGroup %>">
+          <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
+            <input type="submit" class="btn btn-primary" value="Save" />
+          </div>
+        </div> -->
+
+        <!-- Update Button -->
+        <div class="form-group">
+          <div class="col-lg-offset-2" style="<%= offsetForCol2 %> margin-top : 10px;">
+            <a onclick="submitFunc(); return true" class="btn btn-primary calibriFont" style="padding-bottom : 10px">
+              <i class="fa fa-check"></i> &nbsp; Save
+          </a>
+          </div>
+        </div>      
+        
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function submitFunc()
+  {        
+    /*
+    alert(document.getElementById('salesexec').selectedIndex);*/
+    if((document.getElementById('salesexec').selectedIndex === 0) && (document.getElementById('markexec').selectedIndex === 0))
+    {
+      alert('Select Sales Representative or Marketing Representative or Both');
+      return false;
+    }
+    else
+    {
+      document.getElementById('myform').submit();
+    }    
+  }
+</script>

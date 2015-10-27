@@ -1,41 +1,25 @@
-
 <div class="col-lg-4">
 <div class="panel panel-default">
 	  <div class="panel-heading">
-			<h3 class="panel-title">Sales details</h3>
+			<h3 class="panel-title">Requirement Status</h3>
 	  </div>
 	<div class="panel-body">
-		<canvas id="slgraph"></canvas>
-	</div>
-</div>
-</div>
-
-<div class="col-lg-4">
-<div class="panel panel-default">
-	  <div class="panel-heading">
-			<h3 class="panel-title">Prospect Statistics</h3>
-	  </div>
-	<div class="panel-body">
-		<canvas id="eagraph"></canvas>
+		<canvas id="requgraph"></canvas>
+		<div id="pielegend"></div>
 	</div>
 </div>
 </div>
 
 <script type="text/javascript">
-	var ctx = document.getElementById("slgraph").getContext("2d");
 
-	$.get('/reports/slgraph' , function(response){
+	var ctx = document.getElementById("requgraph").getContext("2d");
+
+	$.get('/reports/requgraph' , function(response){
 		// For a pie chart
 		var myPieChart = new Chart(ctx).Pie(response.data);
-
-	});
-
-	var ctx1 = document.getElementById("eagraph").getContext("2d");
-
-	$.get('/reports/eagraph' , function(response){
-		// For a pie chart
-		console.log(response);
-		var myPieChart = new Chart(ctx1).Pie(response.data);
+          myPieChart.generateLegend();
+          /*document.getElementById('pielegend').innerHTML = myPieChart.generateLegend();*/
 	});
 
 </script>
+

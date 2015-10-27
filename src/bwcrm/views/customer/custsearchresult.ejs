@@ -1,0 +1,140 @@
+<center><h3><b style="color:red">CUSTOMER SEARCH RESULTS</b></h3></center>
+<table id="custtable"></table>
+<br />
+<script>
+    $(function () {        
+        $('#custtable').bootstrapTable({
+            method: 'get',
+            url: encodeURI('/listcustsearch?id=' + '<%= p_cust %>'),
+            cache: false,
+            height: 500,
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false                 
+            } ,
+
+            {
+                field: 'salesexec',
+                title: 'Sales Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'markexec',
+                title: 'Marketing Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'cid',
+                title: 'Customer ID',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+            {
+                field: 'custname',
+                title: 'Customer Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+            {
+                field: 'custtype',
+                title: 'Customer Type',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+            {
+                field: 'phnum',
+                title: 'Phone No',
+                align: 'left',
+                valign: 'middle',
+                sortable: false
+            } ,
+
+            {
+                field: 'addr',
+                title: 'Address',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } , 
+
+            {
+                field: 'locality',
+                title: 'Locality',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'pincode',
+                title: 'PIN Code',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'sexec',
+                title: 'Sales Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'mexec',
+                title: 'Marketing Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'createdAt',
+                title: 'Created Date',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'updatedAt',
+                title: 'Last Modified Date',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } 
+
+            ]
+        });
+    });
+</script>

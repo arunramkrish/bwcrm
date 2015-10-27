@@ -1,7 +1,7 @@
 module.exports = {
 
-	    getFormattedDate : function(arg){
-		    var today = new Date(arg.toString());
+	   	getFormattedDate : function(arg){	
+	   		var today = new Date(arg.toString());   			    
 		    var dd = today.getDate();
 		    var mm = today.getMonth()+1; //January is 0!
 
@@ -12,7 +12,7 @@ module.exports = {
 		    if(mm<10){
 		        mm='0'+mm
 		    } 
-		    return mm + '-' + dd+ '-' + yyyy;
+		    return dd + '/' + mm + '/' + yyyy;
 	    }	
 
 };

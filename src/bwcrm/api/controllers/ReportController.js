@@ -1,64 +1,108 @@
-/**
- * ReportController
- *
- * @description :: Server-side logic for managing Reports
- * @help        :: See http://links.sailsjs.org/docs/controllers
- */
-
 module.exports = {
 
-	getSavingsAndLoanContractGraph : function(req , res ){
-		SavingsContract.find().exec(function(err , sc){
+	reportsRequirement : function(req , res ){
+		Requ.find({st : 'Follow-Up'}).populateAll().exec(function(err, fp){
 			if(err )
 				ErrorService.reportError(err, res );
-			LoanContract.find().exec(function(err , lc){
-				if(err )
-					ErrorService.reportError(err, res );
+		Requ.find({st : 'Billed'}).exec(function(err , bill){
+			if(err )
+				ErrorService.reportError(err, res );	
+		Requ.find({st : 'Outside Purchase'}).exec(function(err , outpur){
+			if(err )
+				ErrorService.reportError(err, res );	
+		Requ.find({st : 'Not required'}).exec(function(err , notreq){
+			if(err )
+				ErrorService.reportError(err, res );	
+		Requ.find({st : 'Quatation given'}).exec(function(err , quote){
+			if(err )
+				ErrorService.reportError(err, res );			
+			res.locals.layout = 'report_layout';
+			sails.log(outpur);
+			return res.view('reports/requirement' , { p_fp : fp, p_bill : bill, p_outpur : outpur, p_notreq : notreq, p_quote : quote });
+		});
+		});
+		});
+		});
+		});
+
+	} ,
+
+
+	getRequirementGraph : function(req , res ){
+		Requ.find({st : 'Follow-Up'}).exec(function(err , fpcount){
+			if(err )
+				ErrorService.reportError(err, res );
+		Requ.find({st : 'Billed'}).exec(function(err , billcount){
+			if(err )
+				ErrorService.reportError(err, res );	
+		Requ.find({st : 'Outside Purchase'}).exec(function(err , outpurcount){
+			if(err )
+				ErrorService.reportError(err, res );	
+		Requ.find({st : 'Not required'}).exec(function(err , notreqcount){
+			if(err )
+				ErrorService.reportError(err, res );	
+		Requ.find({st : 'Quatation given'}).exec(function(err , quotecount){
+			if(err )
+				ErrorService.reportError(err, res );															
 				return res.json({ data :[
 										{
-											label : 'Savings Contracts' ,
-											value : sc.length ,
-											color: "#46BFBD",
+											label : 'Follow-Up' ,
+											value : fpcount.length ,
+											color: "red",
 									        highlight: "#5AD3D1"
 										} ,
 										{
-											label : 'Loan Contracts' ,
-											value : lc.length ,
-											color:"#F7464A",
+											label : 'Billed' ,
+											value : billcount.length ,
+											color:"green",
 									        highlight: "#FF5A5E"
-										}
+										} ,
+										{
+											label : 'Outside Purchase' ,
+											value : outpurcount.length ,
+											color:"blue",
+									        highlight: "#FF5A5E"
+										} ,
+										{
+											label : 'Not required' ,
+											value : notreqcount.length ,
+											color:"black",
+									        highlight: "#FF5A5E",
+									        labelFontSize : '10',
+        									labelAlign : 'left'
+										} ,
+										{
+											label : 'Quatation given' ,
+											value : quotecount.length ,
+											color:"brown",
+									        highlight: "#FF5A5E"
+										}										
 									]
 								});
-			});
+		});
+		});
+		});
+		});
 		});
 	} ,
 
-	getEconomicActivityGraph : function ( req , res){
 
-		EconomicActivity.find().exec(function(err , ea ){
-			for(var i = 0 ; i < ea.length ; i++){
-				ea[i].value = 0 ;
-				ea[i].label = ea[i].name ;
-			}
-
-			IndividualClient.find().populate('ea').exec(function(err , ic ){
-
-				for(var i = 0 ; i < ic.length ; i++ ){
-					for(var j = 0 ;  j < ea.length ; j++){
-						if(ic[i].ea.id.localeCompare(ea[j].id) == 0 ){
-							ea[j].value++;
-						}
-					}
-				}
-
-				for(var i = 0 ; i < ea.length ; i ++ ){
-					ea[i].color = '#'+Math.floor(Math.random()*16777215).toString(16);
-				}
-
-				res.json({ data : ea });
-			});
+	reportsSearchReqDate : function(req , res ){
+		Requ.find({createdAt : {'$gte': req.param('fromdate'), '$lt': req.param('todate')}}).exec(function(err, requ){
+			if(err )
+				ErrorService.reportError(err, res );	
+			res.locals.layout = 'report_layout';				
+			return res.view('reports/searchreqdateout' , { p_requ : requ });
 		});
-	}
-	
+
+	} ,
+
+
+	reportsSearchReqDatePage : function( req , res ) {
+		return res.view('reports/searchreqbydate' , { query : req.param('q')});
+	} , 
+
+
+
 };
 

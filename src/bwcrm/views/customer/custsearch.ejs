@@ -1,0 +1,50 @@
+<div class="col-lg-12 calibriFont">
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/custsearch">
+      <fieldset>
+        <legend>Search Customer</legend>
+       
+
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var formGroup = ' margin-bottom : 10px; ' %>
+
+        <!-- Customer Name -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="custname" >Customer Name</label>
+          <div class="<%= textBoxColClass %>">
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" required title="Customer Name">
+          </div>
+        </div>
+
+        <!-- Phone Number  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="phnum" class="<%= labelColClass %>">Phone Number</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="phnum" id="phnum"  required title="Phone Number">
+          </div>
+        </div>        
+
+        <!-- Search Button -->
+        <div class="form-group">
+          <div class="col-lg-offset-2" style="<%= offsetForCol2 %> margin-top : 10px;">
+            <a onclick="submitFunc(); return true" class="btn btn-primary calibriFont" style="padding-bottom : 10px">
+              <i class="fa fa-search"></i> &nbsp; Search
+          </a>
+          </div>
+        </div>      
+        
+      </fieldset>
+    </form>
+  </divSearch</div>
+
+<script type="text/javascript">
+  function submitFunc()
+  {        
+      document.getElementById('myform').submit();
+  }
+</script>

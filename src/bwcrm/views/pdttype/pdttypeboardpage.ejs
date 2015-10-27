@@ -1,0 +1,182 @@
+<legend>&nbsp;&nbsp;Product Details</legend>
+<table id="pdttypetable"></table>
+
+<br />
+
+<center>
+<button class="btn btn-success" data-toggle="modal" data-target="#AddPdtTypeModal"><i class="fa fa-plus"></i> &nbsp; Add</button>
+
+<button onclick="doPdtType(1);"  id="btnEdit" class="btn btn-primary" disabled ><i class="fa fa-edit"></i> &nbsp; Edit</button>
+
+<button onclick="doPdtType(2);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+</center>
+
+<script>
+    <% if( query !== undefined ){
+        if( query.localeCompare('added') === 0 ) { %>
+            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Product Type Added');
+        <% }
+        else if(query.localeCompare('updated') === 0 ) { %>
+            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Product Type Updated');  
+        <% }  
+        else if(query.localeCompare('alreadythere') === 0 ) { %>
+            alertify.error('<i class="fa fa-thumbs-down"></i> &nbsp; Product Type Exists');  
+        <% }               
+    } %>
+</script>
+
+<script>
+
+    $(function () {
+       $('#pdttypetable').bootstrapTable({
+            method: 'get',
+            url: '/listpdttypes',
+            cache: false,
+            height: 450,
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+            onCheck : function(row){
+                document.getElementById('btnEdit').disabled = false ;
+                document.getElementById('btnDelete').disabled = false ;
+            } ,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'pdttype',
+                title: 'Product Type',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            }  
+
+            ]
+
+        });
+
+    });
+
+</script>
+
+<script>
+
+    function doPdtType(a){
+
+        if(a === 1){
+            var selectedRows =  $('#pdttypetable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var d = document.getElementById('EditPdtTypeModalForm');
+
+            $("#pid").val(selectedRow.id);
+            $("#ppdttype").val(selectedRow.pdttype);
+            $('#EditPdtTypeModal').modal('show');
+        }
+
+        else if(a === 2){
+
+            alertify.confirm("Delete Product Type ?", function (e) {
+                if (e) {
+                    var selectedRows =  $('#pdttypetable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];     
+                    $.get('/deletepdttype' , { id : selectedRow.id }).done(function(data){
+                        console.log(data);
+                        if(data.status !== undefined ){
+                            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Product Type Deleted');
+                            $('#pdttypetable').bootstrapTable('refresh' , { url : '/listpdttypes'} );
+                        }
+                    });
+                } else {
+
+                }
+            }); 
+
+        }    
+    	
+    }
+
+</script>
+
+<div class="modal fade" id="AddPdtTypeModal" tabindex="-1" role="dialog" aria-labelledby="Add Product Type" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Product Type</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="AddPdtTypeModalForm" method="post" class="form-horizontal" action="\pdttypeadd">
+                    <div class="form-group">
+                        <label class="col-xs-4">Product Type Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="pdttype" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="EditPdtTypeModal" tabindex="-1" role="dialog" aria-labelledby="Edit Product Type" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Product Type</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="EditPdtTypeModalForm" method="post" class="form-horizontal" action="\pdttypeupdate">
+                    <div class="form-group">
+                        <input type="hidden" name="pid" id="pid"/>
+                        <label class="col-xs-3">Product Type Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="ppdttype"  id="ppdttype"  size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button onclick="submitFunc()" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function submitFunc()
+    {
+        document.getElementById('EditPdtTypeModalForm').submit();
+    }
+</script>

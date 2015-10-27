@@ -1,0 +1,20 @@
+    $(function(){    
+        $('input[type="radio"]').click(function(){
+            if($(rstatustype).is(":checked")){
+                document.getElementById('fpdatediv').style.display="block";
+                document.getElementById('fpdatediv').style.visibility="visible";
+            }
+            else if($(rstatustype).is(":not(:checked)")){
+                document.getElementById('fpdatediv').style.display="none";
+                document.getElementById('fpdatediv').style.visibility="hidden"; 
+            }
+        });
+    });
+
+    style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group"
+
+                        <%
+
+                        if($(rstatustype).is(":checked").val())
+
+                    %>

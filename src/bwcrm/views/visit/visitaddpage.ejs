@@ -1,0 +1,120 @@
+<div class="col-lg-12 calibriFont">
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/visitadd">
+      <fieldset>
+        <legend>Add Visit</legend>
+     
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var formGroup = ' margin-bottom : 2px; ' %>
+      
+
+        <input type="hidden" name="id" value=<%= proj.id %> />  
+        <input type="hidden" name="cuid" value=<%= proj.cust %> /> 
+
+          <!-- Customer Name -->
+          <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="custname" >Customer Name</label>
+            <div class="<%= textBoxColClass %>">
+              <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" value=<%= proj.custname %> required readonly>
+            </div>
+          </div>
+
+          <!-- Project Name -->
+          <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="projname" >Project Name</label>
+            <div class="<%= textBoxColClass %>">
+              <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="projname" id="projname" value=<%= proj.projname %> required readonly>
+            </div>
+          </div>
+
+   
+
+         <!-- Location -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="loc" class="<%= labelColClass %>">Location</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="loc" id="loc">
+          </div>
+        </div>
+
+        <!-- contnum  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="contnum" class="<%= labelColClass %>">Contact number</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contnum" id="contnum">
+          </div>
+        </div>
+
+       
+
+       <!-- Status  -->
+        <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" for="st" class="<%= labelColClass %>">Status</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+                <select style="<%= selectBoxStyle %>" name="st" id="st"  required title="Status">
+                  <option>Select Status</option>
+                  <option>Follow-up</option>
+                  <option>Billed</option>
+                  <option>Outside Purchase</option>
+                  <option>Not required</option>
+                  <option>Quatation given</option>
+                </select>
+            </div>
+        </div>  
+
+         <!-- Next follow-up Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="nfudate" class="<%= labelColClass %>">Next Follow-up date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" style="padding-left: 5px; height : 30px ; align : left" name="nfudate" id="nfudate" >            
+          </div>
+        </div>     
+
+        <!-- Sales Executive -->
+        <div class="form-group" style=" margin-bottom : 2px; ">
+            <label style="<%= labelSpaceWidth%>" for="salesexec" class="<%= labelColClass %>">Sales Executive</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+              <select style="<%= selectBoxStyle %>"  name="salesexec" id="salesexec"  title="Sales Executive">
+                      <option>Select Sales Executive</option>              
+                      <% for(var i=0 ; i< suser.length ; i++) { %>
+                          <option value=<%= suser[i].id %>><%= suser[i].ename %></option>
+                      <% } %>
+              </select>
+          </div>
+        </div> 
+        <!-- Marketing Executive -->
+        <div class="form-group" style=" margin-bottom : 2px; ">
+            <label style="<%= labelSpaceWidth%>" for="markexec" class="<%= labelColClass %>">Marketing Executive</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+              <select style="<%= selectBoxStyle %>"  name="markexec" id="markexec"  title="Marketing Executive">
+                      <option>Select Marketing Executive</option>
+                      <% for(var i=0; i<muser.length ; i++) { %>
+                          <option value=<%= muser[i].id %>><%= muser[i].ename %></option>
+                      <% } %>
+              </select>
+          </div>
+        </div> 
+
+        
+        <!-- Save button -->
+        <div class="form-group" style="<%= formGroup %>">
+          <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
+            <input type="submit" class="btn btn-primary" value="Save" />
+          </div>
+        </div> 
+      </fieldset>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy'
+    });
+  });
+</script>

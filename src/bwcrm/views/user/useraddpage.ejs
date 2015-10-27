@@ -1,146 +1,187 @@
 <div class="col-lg-12 calibriFont">
-<div class="well bs-component">
-<form id="myform" class="form-horizontal" method="post" action="/signup">
-  <fieldset>
-    <legend>User Details</legend>
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/signup">
+      <fieldset>
+        <legend>Add User</legend>
 
-<% 
-    if( query !== undefined ){
-      if( query.localeCompare('alreadythere') === 0 ) { %>
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>Warning!</strong> Username already taken.
-        </div> 
-  <% }
-   } %>
+        <% if( query !== undefined ){
+          if( query.localeCompare('alreadythere') === 0 ) { %>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Warning!</strong> Username already taken.
+            </div> 
+          <% }
+        } %>
 
-   <% var labelColClass = 'col-lg-2 calibriFont' %>
-   <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
-   <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
-   <% var labelSpaceWidth = 'width: 12.66666667%;' %>
-   <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
-   <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
-   <% var formGroup = ' margin-bottom : 2px; ' %>
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var formGroup = ' margin-bottom : 2px; ' %>
 
-        <!-- Employee code  -->
+        <!-- Employee Code -->
         <div class="form-group" style="<%= formGroup %>">
-          <label style="<%= labelSpaceWidth%>" for="ecode" class="<%= labelColClass %>">Employee Code</label>
+          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="ecode" >Employee Code</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ecode" id="ecode" required>
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ecode" id="ecode" required title="Employee Code">
           </div>
-        </div> 
+        </div>
 
-        <!-- Employee Name  -->
+        <!-- Employee Name -->
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" for="ename" class="<%= labelColClass %>">Employee Name</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ename" id="ename" required>
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ename" id="ename" required title="Employee Name">
           </div>
-        </div>
+        </div>    
 
-         <!-- Date of joining -->
-        <div class="form-group" style="<%= formGroup %>">
-          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="doj" >Date of joining</label>
-          <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" class="form-control datepicker" type="date" placeholder="mm-dd-yyyy" name="doj" id="doj" required >
-           </div>
-        </div>  
-           
-    
-              <!-- Department  -->
+        <!-- Department -->
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" for="dept" class="<%= labelColClass %>">Department</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="dept" id="dept" required>
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="dept" id="dept" >
           </div>
-        </div> 
+        </div>
 
-     
-
-        <!-- Designation  -->
+        <!-- Designation -->
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" for="desg" class="<%= labelColClass %>">Designation</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="desg" id="desg" required>
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="desg" id="desg" >
           </div>
         </div>
 
-        <!-- Contact Number  -->
+        <!-- Date of Joining -->
         <div class="form-group" style="<%= formGroup %>">
-          <label style="<%= labelSpaceWidth%>" for="contnum" class="<%= labelColClass %>">Contact Number</label>
+          <label style="<%= labelSpaceWidth%>" for="doj" class="<%= labelColClass %>">Date of Joining</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="tel" class="form-control" name="contnum" id="contnum"  required>
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" style="padding-left: 5px; height : 30px ; align : left" name="doj" id="doj" >            
           </div>
-        </div>        
+        </div>   
 
-        <!-- CTC  -->
+        <!-- Phone Number  -->
         <div class="form-group" style="<%= formGroup %>">
-          <label style="<%= labelSpaceWidth%>" for="ctc" class="<%= labelColClass %>">CTC</label>
+          <label style="<%= labelSpaceWidth%>" for="phnum" class="<%= labelColClass %>">Phone Number</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="tel" class="form-control" name="ctc" id="ctc"  required>
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="phnum" id="phnum">
           </div>
-        </div>     
-
-      <!-- Username -->
-      <div class="form-group" style="<%= formGroup %>">
-        <label style="<%= labelSpaceWidth%>" for="loginid" class="<%= labelColClass %>">Login ID</label>
-        <div class="<%= textBoxColClass %>">
-          <input style="<%= textInputStyle %>" type="text" class="form-control" name="username" id="username"  required>
         </div>
-      </div>
 
-      <!-- Password -->
-      <div class="form-group" style=" margin-bottom : 2px; ">
-        <label style="<%= labelSpaceWidth%>" for="password" class="<%= labelColClass %>">Password</label>
-        <div class="<%= textBoxColClass %>">
-          <input style="<%= textInputStyle %>" type="password" class="form-control" name="password" id="password"  required>
-        </div>
-      </div>
-
-      <!-- Status -->
-      <div class="form-group" style=" margin-bottom : 2px; ">
-        <label style="<%= labelSpaceWidth%>" for="status" class="<%= labelColClass %>">Status</label>
-        <div class="<%= textBoxColClass %>">
-          <input style="<%= textInputStyle %>" type="text" class="form-control" name="status" id="status"  required>
-        </div>
-      </div>
-
-      <!-- Role -->
-      <div class="form-group" style=" margin-bottom : 2px; ">
-          <label style="<%= labelSpaceWidth%>" for="role" class="<%= labelColClass %>">Role</label>
-          <div class="<%= textBoxColClass %> calibriFont">
-            <select style="<%= selectBoxStyle %>"  name="role" id="role" required>
-                    <% for(var i=0 ; i< roles.length ; i++) { %>
-                        <option value=<%= roles[i].id %>><%= roles[i].title %></option>
-                    <% } %>
-            </select>
-        </div>
-      </div>    
-
-
-      <!-- Date of Resignation -->
+        <!-- Email -->
         <div class="form-group" style="<%= formGroup %>">
-          <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="dor" >Date of resignation</label>
+          <label style="<%= labelSpaceWidth%>" for="email" class="<%= labelColClass %>">Email</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" class="form-control datepicker" type="date" placeholder="mm-dd-yyyy" name="dor" id="dor" required >
-           </div>
-        </div>  
-
-      <!-- Cancel and Submit Button -->
-      <div class="form-group" style="<%= formGroup %>">
-        <div class="col-lg-offset-2" style="<%= offsetForCol2 %> margin-top : 10px;">
-          <a onclick="submitFunc();" class="btn btn-primary calibriFont" style="padding-bottom : 10px margin-top : 10px;">
-            <i class="fa fa-check"></i> &nbsp; Save
-          </a>
+            <input style="<%= textInputStyle %>" type="email" class="form-control"  style="padding-left: 5px; height : 30px ; align : left" name="email" id="email" >
+          </div>
         </div>
-      </div>
-      <script type="text/javascript">
-      function submitFunc()
-      {
-        document.getElementById('myform').submit();
+
+        <!-- Cost To Company  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="ctc" class="<%= labelColClass %>">Cost To Company</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ctc" id="ctc">
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" for="status" class="<%= labelColClass %>">Status</label>
+            <div class="<%= textBoxColClass %> calibriFont">
+                <select style="<%= selectBoxStyle %>" name="status" id="status"  required title="Status">
+                  <option>Active</option>
+                  <option>Inactive</option>
+                </select>
+            </div>
+        </div>
+
+      	<!-- User Name -->
+      	<div class="form-group" style="<%= formGroup %>">
+      	  <label style="<%= labelSpaceWidth%>" for="username" class="<%= labelColClass %>">User Name</label>
+      	  <div class="<%= textBoxColClass %>">
+      	    <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="username" id="username"  required title="User Name">
+      	  </div>
+      	</div>
+
+      	<!-- Password -->
+      	<div class="form-group" style=" margin-bottom : 2px; ">
+      	  <label style="<%= labelSpaceWidth%>" for="password" class="<%= labelColClass %>">Password</label>
+      	  <div class="<%= textBoxColClass %>">
+      	    <input style="<%= textInputStyle %>" type="password" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="password" id="password"  required title="Password">
+      	  </div>
+      	</div>
+
+      	<!-- Confirm Password -->
+      	<div class="form-group" style=" margin-bottom : 2px; ">
+      	  <label style="<%= labelSpaceWidth%>" for="cpassword" class="<%= labelColClass %>">Confirm Password</label>
+      	  <div class="<%= textBoxColClass %>">
+      	    <input style="<%= textInputStyle %>" type="password" style="padding-left: 5px; height : 30px ; align : left" class="form-control" name="cpassword" id="cpassword"  required title="Confirm Password" onkeyup="checkPass(); return false;">
+      	  </div>
+          &nbsp;&nbsp;<span id="confirmMessage" class="confirmMessage"></span>
+      	</div>
+
+  	    <!-- Role -->
+      	<div class="form-group" style=" margin-bottom : 2px; ">
+        		<label style="<%= labelSpaceWidth%>" for="role" class="<%= labelColClass %>">Role</label>
+        		<div class="<%= textBoxColClass %> calibriFont">
+          		<select style="<%= selectBoxStyle %>"  name="role" id="role" required title="Role">
+                <option value="">Select Role</option>
+                <% for(var i=0 ; i< roles.length ; i++) { %>
+                    <option value=<%= roles[i].id %>><%= roles[i].title %></option>
+                <% } %>
+          		</select>
+      		</div>
+      	</div> 
+
+        <!-- Date of Resignation -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="dor" class="<%= labelColClass %>">Date of Resignation</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" style="padding-left: 5px; height : 30px ; align : left" name="dor" id="dor" >            
+          </div>
+        </div> 
+
+        <!-- Save button -->
+        <div class="form-group" style="<%= formGroup %>">
+          <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
+            <input type="submit" class="btn btn-primary" value="Save" />
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy'
+    });
+  });
+
+  function checkPass()
+  {
+      var pass1 = document.getElementById('password');
+      var pass2 = document.getElementById('cpassword');
+
+      var message = document.getElementById('confirmMessage');
+
+      var goodColor = "#66cc66";
+      var badColor = "#ff6666";
+
+      if(pass1.value == pass2.value){
+          pass2.style.backgroundColor = goodColor;
+          message.style.color = goodColor;
+          message.innerHTML = "  Passwords Match!"
+      
       }
-    </script>
-  </fieldset>
-</form>
-</div><!-- end of well bs-component -->
-</div><!-- end of col-lg-6 -->
+      else {
+          pass2.style.backgroundColor = badColor;
+          message.style.color = badColor;
+          message.innerHTML = "  Passwords Do Not Match!"
+      }
+  } 
+
+</script>

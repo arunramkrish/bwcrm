@@ -10,76 +10,74 @@ var bcrypt = require('bcryptjs');
 module.exports = {
 
   attributes: {
-  	
-    username : {
-      type : 'string' , 
-      unique : true , 
-      required : false
-    } ,
 
-   // loginid : {
-  //		type : 'string' , 
-  	//	unique : true , 
-  		//required : false
-  //	} ,
+  	username : {
+  		type : 'string' , 
+  		unique : true , 
+  		required : true 
+  	} ,
 
   	password : { 
   		type : 'string' , 
   		required : true 
   	} ,
 
-  	ecode : {
+    ecode : { 
+      type : 'string' , 
+      unique : true , 
+      required : true 
+    } ,
+
+  	ename : {
   		type : 'string' ,
-  		required : false
+  		required : true 
   	} ,
 
-  	ename : { 
-  	type : 'string' ,
-  	required : false 
-  	} ,
-
-  	doj : {
-  		type : 'string' , 
-  		required : false 
-  	} ,
-
-  	role : {
-  		model : 'role' ,
+    dept : {
+      type : 'string' ,
       required : false 
-  	} ,
+    } ,
 
-  	dept : {
-  		type : 'string' ,
-  		required : false  
-  	} ,
-    
     desg : {
       type : 'string' ,
-      required : false  
+      required : false 
+    } ,
+
+    doj : {
+      type : 'string' ,
+      required : false 
+    } ,
+
+  	phnum : {
+      type : 'string' ,
+      required : false       
+    } ,
+
+    email : {
+      type : 'email' , 
+      required : false 
     } ,
 
     ctc : {
-      type : 'integer' ,
-      required : false  
+      type : 'string' ,
+      required : false       
     } ,
+
+    status : {
+      type : 'string' ,
+      required : true 
+    } ,
+
+  	role : {
+  		model : 'role' ,
+  	}	,
 
     dor : {
       type : 'string' ,
-      required : false  
-    } ,
-    
-    status : {
-      type : 'string' ,
-      required : false  
-    } ,
-
-  	contnum : {
-  		type : 'integer' ,
-      required : false
-  	}
+      required : false 
+    } 
 
   } ,
-
 
   //methods 
 
@@ -91,16 +89,13 @@ module.exports = {
   } ,
 
   comparePassword : function( p1 , p2 , cb){
-    
-      bcrypt.compare( p1 , p2 , function(err , res){
-        if(err)
-          cb(err , null);
-        else
-          cb(null , res); 
-      });
+    bcrypt.compare( p1 , p2 , function(err , res){
+      if(err)
+        cb(err , null);
+      else
+        cb(null , res); 
+    });
 
   } //end of comparePassword 
 
-
 };
-

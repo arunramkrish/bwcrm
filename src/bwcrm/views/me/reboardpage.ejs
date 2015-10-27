@@ -1,0 +1,178 @@
+<table id="custtable"></table>
+<br />
+<center>
+<button onclick="doCust(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
+<button onclick="doCust(2);" id="btnEdit" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+<button onclick="doCust(3);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+</center>
+<script>
+    <% if( query !== undefined ){
+        if( query.localeCompare('added') === 0 ) { %>
+            alertify.success('<i class="fa fa-plus"></i> &nbsp; Customer Added');
+        <% }
+        else if(query.localeCompare('updated') === 0 ) { %>
+            alertify.success('<i class="fa fa-pencil"></i> &nbsp; Customer Updated');  
+        <% }
+    } %>
+</script>
+<script>
+    function doCust(a){
+    	if( a === 1 ){
+    		window.location = '/custadd';
+    	}
+    	else if ( a === 2){
+            var selectedRows =  $('#custtable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/custedit?id=" + selectedRow.id);
+            window.location = uri ;
+    	}
+        else{
+            alertify.confirm("Delete Customer ?", function (e) {
+                if (e) {
+                    var selectedRows =  $('#custtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];     
+                    $.get('/deletecust' , { id : selectedRow.id }).done(function(data){
+                        console.log(data);
+                        if(data.status !== undefined ){
+                            alertify.success('<i class="fa fa-trash"></i> &nbsp; Customer Deleted');
+                            $('#custtable').bootstrapTable('refresh' , { url : '/listcust'} );
+                        }
+                    });
+                } else {
+
+                }
+            }); 
+    	}        
+    }
+    $(function () {
+        $('#custtable').bootstrapTable({
+            method: 'get',
+            url: '/listcust',
+            cache: false,
+            height: 500,
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+            onCheck : function(row){
+            	document.getElementById('btnEdit').disabled = false ;
+                document.getElementById('btnDelete').disabled = false ;                    
+            } ,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : true
+            } ,
+
+            {
+                field: 'salesexec',
+                title: 'Sales Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'markexec',
+                title: 'Marketing Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'cid',
+                title: 'Customer ID',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+            {
+                field: 'custname',
+                title: 'Customer Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true 
+            } ,
+
+            {
+                field: 'phnum',
+                title: 'Phone No',
+                align: 'left',
+                valign: 'middle',
+                sortable: false
+            } ,
+
+            {
+                field: 'addr',
+                title: 'Address',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } , 
+
+            {
+                field: 'locality',
+                title: 'Locality',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'pincode',
+                title: 'PIN Code',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'sexec',
+                title: 'Sales Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+             {
+                field: 'mexec',
+                title: 'Marketing Executive',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'createdAt',
+                title: 'createdate',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'updatedAt',
+                title: 'lastmodifieddate',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+           
+            ]
+        });
+    });
+</script>

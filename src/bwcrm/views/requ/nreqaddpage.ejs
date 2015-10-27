@@ -1,0 +1,287 @@
+<div class="col-lg-12 calibriFont">
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/projreqadd">
+      <fieldset>
+        <legend>Project</legend>
+        <% if( query !== undefined ){
+          if( query.localeCompare('alreadythere') === 0 ) { %>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Warning!</strong> Project name already exists.
+            </div> 
+          <% }
+        } %>
+    
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var labelSpaceWidth = 'width: 13.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var formGroup = ' margin-bottom : 5px; ' %> 
+
+ 
+ <input type="hidden" name="id" value=<%= proj.id %> />
+
+
+
+  <legend>Requirement</legend>
+
+        <!-- Requirement Type -->
+        <div class="form-group"  >            
+            <div class="<%= labelColClass %> calibriFont">
+              <input type="checkbox" name="chim" value="chim" id="chim"/> Chimney <br />              
+            </div>       
+           </div>         
+
+      <div id="chimdiv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+        <!-- Measurement/Quantity -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="chimmeasure" class="<%= labelColClass %>">Quantity</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="chimmeasure" id="chimmeasure" >
+          </div>
+        </div>    
+              
+        <!-- Approximate Value -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="chimapprox" class="<%= labelColClass %>">Approximate Value</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="chimapprox" id="chimapprox" >
+          </div>
+        </div> 
+
+        <!-- Requirement Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="chimreqdate" class="<%= labelColClass %>">Requirement Date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" style="padding-left: 5px; height : 30px ; align : left" name="chimreqdate" id="chimreqdate" >
+          </div>
+        </div> 
+
+        <!-- Remarks -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="chimremarks" class="<%= labelColClass %>">Remarks</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="chimremarks" id="chimremarks" >
+          </div>
+        </div>   
+    </div>    
+
+        <div class="form-group"  >            
+            <div class="<%= labelColClass %> calibriFont">
+              <input type="checkbox" name="sol" value="sol" id="sol"/> Solar <br />
+            </div>       
+           </div>  
+
+  <div id="soldiv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+        <!-- Measurement/Quantity -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="solmeasure" class="<%= labelColClass %>">Quantity</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="solmeasure" id="solmeasure" >
+          </div>
+        </div>    
+              
+        <!-- Approximate Value -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="solapprox" class="<%= labelColClass %>">Approximate Value</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="solapprox" id="solapprox" >
+          </div>
+        </div> 
+
+        <!-- Requirement Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="solreqdate" class="<%= labelColClass %>">Requirement Date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy"  style="padding-left: 5px; height : 30px ; align : left" name="solreqdate" id="solreqdate" >
+          </div>
+        </div> 
+
+        <!-- Remarks -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="solremarks" class="<%= labelColClass %>">Remarks</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="solremarks" id="solremarks" >
+          </div>
+        </div>   
+    </div>
+           
+        <div class="form-group"  >            
+            <div class="<%= labelColClass %> calibriFont">
+              <input type="checkbox" name="wtile" value="wtile" id="wtile"/> Wall Tiles <br />
+            </div>       
+           </div> 
+
+<div id="wtilediv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+        <!-- Measurement/Quantity -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="wtilemeasure" class="<%= labelColClass %>">Measurement</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="wtilemeasure" id="wtilemeasure" >
+          </div>
+        </div>    
+              
+        <!-- Approximate Value -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="wtileapprox" class="<%= labelColClass %>">Approximate Value</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="wtileapprox" id="wtileapprox" >
+          </div>
+        </div> 
+
+        <!-- Requirement Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="wtilereqdate" class="<%= labelColClass %>">Requirement Date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy"  style="padding-left: 5px; height : 30px ; align : left" name="wtilereqdate" id="wtilereqdate" >
+          </div>
+        </div> 
+
+        <!-- Remarks -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="wtileremarks" class="<%= labelColClass %>">Remarks</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="wtileremarks" id="wtileremarks" >
+          </div>
+        </div>   
+    </div>           
+
+        <div class="form-group"  >            
+            <div class="<%= labelColClass %> calibriFont">
+              <input type="checkbox" name="ftile" value="ftile" id="ftile"/> Floor Tiles <br />
+            </div>       
+           </div>     
+
+<div id="ftilediv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+        <!-- Measurement/Quantity -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="ftilemeasure" class="<%= labelColClass %>">Measurement</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ftilemeasure" id="ftilemeasure" >
+          </div>
+        </div>    
+              
+        <!-- Approximate Value -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="ftileapprox" class="<%= labelColClass %>">Approximate Value</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ftileapprox" id="ftileapprox" >
+          </div>
+        </div> 
+
+        <!-- Requirement Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="ftilereqdate" class="<%= labelColClass %>">Requirement Date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy"  style="padding-left: 5px; height : 30px ; align : left" name="ftilereqdate" id="ftilereqdate" >
+          </div>
+        </div> 
+
+        <!-- Remarks -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="ftileremarks" class="<%= labelColClass %>">Remarks</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="ftileremarks" id="ftileremarks" >
+          </div>
+        </div>   
+    </div>  
+
+
+        <div class="form-group"  >            
+            <div class="<%= labelColClass %> calibriFont">
+              <input type="checkbox" name="sanit" value="sanit" id="sanit"/> Sanitarywares <br />
+            </div>       
+           </div>     
+
+<div id="sanitdiv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+        <!-- Measurement/Quantity -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="sanitmeasure" class="<%= labelColClass %>">Quantity</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="sanitmeasure" id="sanitmeasure" >
+          </div>
+        </div>    
+              
+        <!-- Approximate Value -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="sanitapprox" class="<%= labelColClass %>">Approximate Value</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="sanitapprox" id="sanitapprox" >
+          </div>
+        </div> 
+
+        <!-- Requirement Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="sanitreqdate" class="<%= labelColClass %>">Requirement Date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy"  style="padding-left: 5px; height : 30px ; align : left" name="sanitreqdate" id="sanitreqdate" >
+          </div>
+        </div> 
+
+        <!-- Remarks -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="sanitremarks" class="<%= labelColClass %>">Remarks</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="sanitremarks" id="sanitremarks" >
+          </div>
+        </div>   
+    </div>  
+
+        <div class="form-group"  >            
+            <div class="<%= labelColClass %> calibriFont">
+              <input type="checkbox" name="pipe" value="pipe" id="pipe"/> Pipes and Fittings <br />
+            </div>       
+           </div>    
+
+<div id="pipediv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+        <!-- Measurement/Quantity -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="pipemeasure" class="<%= labelColClass %>">Quantity</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="pipemeasure" id="pipemeasure" >
+          </div>
+        </div>    
+              
+        <!-- Approximate Value -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="pipeapprox" class="<%= labelColClass %>">Approximate Value</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="pipeapprox" id="pipeapprox" >
+          </div>
+        </div> 
+
+        <!-- Requirement Date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="pipereqdate" class="<%= labelColClass %>">Requirement Date</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy"  style="padding-left: 5px; height : 30px ; align : left" name="pipereqdate" id="pipereqdate" >
+          </div>
+        </div> 
+
+        <!-- Remarks -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="piperemarks" class="<%= labelColClass %>">Remarks</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="piperemarks" id="piperemarks" >
+          </div>
+        </div>   
+    </div>  
+
+
+        <!-- Save button -->
+        <div class="form-group" style="<%= formGroup %>">
+          <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
+            <a onclick="submitFunc();" class="btn btn-primary calibriFont" style="padding-bottom : 10px"> Back to customer details </a>
+            <a onclick="submitFunc1();" class="btn btn-primary calibriFont" style="padding-bottom : 10px"> Back to View details </a>
+            &nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Save" />
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+
+  </div>
+</div>
+  

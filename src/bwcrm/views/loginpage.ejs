@@ -1,31 +1,55 @@
-      <!-- Form --> 
-      <div class="col-lg-6 col-lg-offset-3">
-        <div class="well bs-component">
-		<form method="POST" action="/login" class="form-horizontal">
-			<fieldset>
-		        <div class="form-group">
-
-
-
-		          <label for="username" class="col-lg-2 control-label">Username</label>
-		          <div class="col-lg-10">
-		            <input type="text" class="form-control" name="username" id="username" required>
-		          </div>
-		        </div>
-		        <div class="form-group">
-		          <label for="password" class="col-lg-2 control-label">Password</label>
-		          <div class="col-lg-10">
-		            <input type="password" class="form-control" name="password" id="password" required>
-		          </div>
-		        </div>		        
-	            <!-- save button -->
-	            <div class="form-group">
-	              <div class="col-lg-10 col-lg-offset-2">
-	                <input type="submit" class="btn btn-primary" value="Login" />
-	              </div>
-	            </div> 
-	           
-			</fieldset>
-		</form>
+<% 
+  if( query !== undefined ){
+    if( query.localeCompare('notpresent') === 0 ) { %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> Username invalid.
+      </div> 
+    <% }
+    else if(query.localeCompare('wrongpwd') === 0 ) { %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> Password mismatch.
+      </div>  
+    <% }
+    else if(query.localeCompare('blocked') === 0 ) { %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> User blocked. Please contact administrator.
+      </div> 
+    <% }
+} %>
+<!-- Form --> 
+<div class="col-lg-6 col-lg-offset-3">
+  <div class="well bs-component">
+    <form method="POST" action="/login" class="form-horizontal">
+      <fieldset>
+        <!--Username -->
+        <div class="form-group">
+          <label for="username" class="col-lg-2 control-label">Username</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" name="username" id="username" required title="Username">
+          </div>
         </div>
-      </div>
+        <!--Password -->
+        <div class="form-group">
+          <label for="password" class="col-lg-2 control-label">Password</label>
+          <div class="col-lg-10">
+            <input type="password" class="form-control" name="password" id="password" required title="Password">
+          </div>
+        </div>	
+        <!--Login Button -->	        
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <input type="submit" class="btn btn-primary" value="Login" />
+          </div>
+        </div>              
+      </fieldset>
+    </form>
+  </div>
+</div>
+<script>    
+  window.onload = function() {
+    document.getElementById("username").focus();
+  };
+</script>

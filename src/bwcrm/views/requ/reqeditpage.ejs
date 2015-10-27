@@ -1,0 +1,118 @@
+<div class="col-lg-12">
+  <div class="well bs-component">
+    <form id="myform" class="form-horizontal" method="post" action="/requpdate">
+      <fieldset>
+        <legend>Edit Requirement</legend>
+       
+        <% var labelColClass = 'col-lg-2 calibriFont' %>
+        <% var textBoxColClass = 'col-lg-3 textboxes calibriFont' %>
+        <% var labelSpaceWidth = 'width: 12.66666667%;' %>
+        <% var offsetForCol2 = 'margin-left : 12.66666667%;' %>
+        <% var textInputStyle = "padding-left: 5px ; height : 30px ;" %>
+        <% var selectBoxStyle = ' padding-left: 5px; height : 30px ; align : left ; font-size: 17px '%>
+        <% var formGroup = ' margin-bottom : 2px; ' %>
+
+       <input type="hidden" name="id" value=<%= p_requ.id %> />
+
+
+          <!-- Customer Name -->
+          <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="custname" >Customer Name</label>
+            <div class="<%= textBoxColClass %>">
+              <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" value=<%= p_requ.custname %> required readonly>
+            </div>
+          </div>
+
+          <!-- Project Name -->
+          <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="projname" >Project Name</label>
+            <div class="<%= textBoxColClass %>">
+              <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="projname" id="projname" value=<%= p_requ.projname %> required readonly>
+            </div>
+          </div>
+
+        <!-- Requirement Type -->
+        <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="reqtype" >Requirement Type</label>
+            <div class="<%= textBoxColClass %>">
+                <select style="<%= selectBoxStyle %>" name="reqtype" id="reqtype" >
+                  <option <% if(p_requ.reqtype.localeCompare('Floor tiles') === 0 ) {%>  selected <% } %>>Floor tiles</option>
+                  <option <% if(p_requ.reqtype.localeCompare('Exterior tiles') === 0 ) {%>  selected <% } %>> Exterior tiles</option>
+                  <option <% if(p_requ.reqtype.localeCompare('Sanitary Wares') === 0 ) {%>  selected <% } %>> Sanitary Wares</option>
+                   <option <% if(p_requ.reqtype.localeCompare('Chimney') === 0 ) {%>  selected <% } %>> Chimney</option>
+                    <option <% if(p_requ.reqtype.localeCompare('Solar') === 0 ) {%>  selected <% } %>> Solar</option>
+                </select>
+            </div>
+        </div>  
+        <!-- Status -->
+        <div class="form-group" style="<%= formGroup %>">
+            <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="st" >Status</label>
+            <div class="<%= textBoxColClass %>">
+                <select style="<%= selectBoxStyle %>" name="st" id="st" >
+                  <option <% if(p_requ.st.localeCompare('Follow-up') === 0 ) {%>  selected <% } %>>Follow-up</option>
+                  <option <% if(p_requ.st.localeCompare('Billed') === 0 ) {%>  selected <% } %>> Billed</option>
+                  <option <% if(p_requ.st.localeCompare('Outside Purchase') === 0 ) {%>  selected <% } %>>Outside Purchase</option>
+                   <option <% if(p_requ.st.localeCompare('Not required') === 0 ) {%>  selected <% } %>>Not required</option>
+                    <option <% if(p_requ.st.localeCompare('Quatation given') === 0 ) {%>  selected <% } %>>Quatation given</option>
+                </select>
+            </div>
+        </div>  
+       
+
+        <!-- Measurement  -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="meas" class="<%= labelColClass %>">Measurement</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="meas" id="meas"  value=<%=p_requ.meas %> >
+          </div>
+        </div>
+
+        <!-- Approximate Value -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="av" class="<%= labelColClass %>">Approximate value</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="av" id="av"  value=<%=p_requ.av %> >
+          </div>
+        </div>
+
+
+       <!-- Next follow-up date -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="nfudate" class="<%= labelColClass %>">Next follow-up date(mm/dd/yyyy)</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" style="padding-left: 5px; height : 30px ; align : left" name="nfudate" id="nfudate" value=<%=p_requ.nfudate %>>
+          </div>
+        </div> 
+
+        <!-- Outside Purchase Reason -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="opr" class="<%= labelColClass %>">Outside Purchase reason</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="opr" id="opr" value=<%=p_requ.opr%>>
+          </div>
+        </div>
+         <!-- Bill number -->
+        <div class="form-group" style="<%= formGroup %>">
+          <label style="<%= labelSpaceWidth%>" for="bn" class="<%= labelColClass %>">Bill number</label>
+          <div class="<%= textBoxColClass %>">
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="bn" id="bn" value=<%=p_requ.bn%>>
+          </div>
+        </div>
+             
+       <!-- Update Button -->
+        <div class="form-group" style="<%= formGroup %>">
+          <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
+            <input type="submit" class="btn btn-primary" value="Update" />
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy'
+    });
+  });
+</script>

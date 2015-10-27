@@ -1,0 +1,949 @@
+<link rel="stylesheet" href="/styles/datepicker.css">
+<script src="/js/bootstrap-datepicker.js"></script>
+<center><h3><b style="color:red">CUSTOMER :</b><b style="color:blue"><%= p_cust.custname %> </b><b style="color:red">- PROJECT DETAILS</b></h3></center><br>
+<script>
+    <% if( query !== undefined ){
+        if( query.localeCompare('added') === 0 ) { %>
+            alertify.success('<i class="fa fa-plus"></i> &nbsp; Project Added');
+        <% }
+        else if(query.localeCompare('updated') === 0 ) { %>
+            alertify.success('<i class="fa fa-pencil"></i> &nbsp; Project Updated');  
+        <% }
+    } %>
+</script>
+<br>
+<div>
+    <div id="proj">
+        <div class="col-lg-12 calibriFont" style="bgcolor:white">
+          <div class="well bs-component">
+        <legend>Projects List</legend>
+        <table id="projtable"></table>
+        <br/>
+        <div align="right">
+            <button onclick="doProj(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
+            <button onclick="doProj(2);" id="btnEditProj" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+            <button onclick="doProj(3);" id="btnDeleteProj" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+            <button onclick="doProj(4);" id="btnShowReq" class="btn btn-info" disabled><i class="fa fa-list"></i> &nbsp; Show Requirements</button>
+        </div>
+        <br />
+        <script>
+            function doProj(a){
+                if ( a === 1) 
+                {
+                 window.location = '/projadd?id=' + '<%= p_cust.id %>'
+                }
+                else if ( a === 2){
+                    var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];
+                    var uri = encodeURI("/projedit?id=" + selectedRow.id );
+                    window.location = uri ;
+                }
+                else if(a === 3) {
+                    alertify.confirm("Delete Project ?", function (e) {
+                        if (e) {
+                            var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+                            var selectedRow = selectedRows[0];     
+                            $.get('/deleteproj' , { id : selectedRow.id }).done(function(data){
+                                console.log(data);
+                                if(data.status !== undefined ){
+                                    alertify.success('<i class="fa fa-trash"></i> &nbsp; Project Deleted');
+                                    $('#projtable').bootstrapTable('refresh' , { url : '/listcustproj?id=' + '<%= p_cust.id.toString() %>'} );
+                                }
+                            });
+                        } 
+                    }); 
+                }
+                else if(a === 4) {
+                        var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+                        var selectedRow = selectedRows[0];
+                        $.get('/passid' , { id : selectedRow.id }).done(function(data){
+                            if(data !== undefined ){
+                                $('#reqtable').bootstrapTable('refresh' , { url : '/listProjReq1?id=' + data.status} );
+                            }
+                        });
+                }
+            }
+        </script>
+        <script>
+            $(function () {
+                $('#projtable').bootstrapTable({
+                    method: 'get',
+                    url: encodeURI('/listcustproj?id=' + '<%= p_cust.id.toString() %>'),
+                    cache: false,                    
+                    striped: false ,
+                    pagination: true,                    
+                    search: true,                    
+                    showRefresh: true, 
+                    pageSize : 5,       
+                    clickToSelect: true,
+                    onCheck : function(row){
+                        document.getElementById('btnEditProj').disabled = false ;
+                        document.getElementById('btnDeleteProj').disabled = false ;                        
+                        document.getElementById('btnShowReq').disabled = false ;    
+                    } ,
+                    columns: [{
+                        field: 'state',
+                        radio : true
+                    } , 
+
+                    {
+                        field: 'id',
+                        title: 'Id',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false 
+                    } ,
+
+                    {
+                        field: 'projname',
+                        title: 'Project Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'projtype',
+                        title: 'Project Type',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } , 
+
+                    {
+                        field: 'description',
+                        title: 'Description',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'startdate',
+                        title: 'Start Date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'enddate',
+                        title: 'End Date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,                
+
+                    {
+                        field: 'addr',
+                        title: 'Address',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'buildstage',
+                        title: 'Building Stage',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } 
+
+                    ]
+                });
+            });
+        </script>
+
+
+          </div>
+        </div>
+    </div>
+
+<div>
+    <div id="req">
+        <div class="col-lg-12 calibriFont">
+          <div class="well bs-component">
+        <legend>Requirements List</legend>
+        <table id="reqtable"></table>
+        <br />
+        <div align="right">
+            <button onclick="doReq(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
+            <button onclick="doReq(2);" id="btnEditReq" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+            <button onclick="doReq(3);" id="btnDeleteReq" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
+            <button onclick="doReq(4);" id="btnAddVisit" class="btn btn-info" disabled><i class="fa fa-trash"></i> &nbsp; Add Visit</button>            
+            <button onclick="doReq(5);" id="btnShowVisit" class="btn btn-warning" disabled><i class="fa fa-trash"></i> &nbsp; Show Visit</button> 
+        </div>
+        <br />
+        <script>
+            function doReq(b){
+                if ( b === 1) 
+                {
+                    var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];
+                    var uri = encodeURI("/reqadd?id=" + selectedRow.id );
+                    window.location = uri ;
+                }
+                else if ( b === 2){
+                    var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];                    
+                    var d = document.getElementById('EditReqModalForm');
+                    $("#rid").val(selectedRow.id);
+                    $("#rprojname").val(selectedRow.projname);
+                    $("#rreqtype").val(selectedRow.reqtype);
+                    $("#rmeasure").val(selectedRow.measureqty);
+                    $("#rapprox").val(selectedRow.approx);
+                    $("#rreqdate").val(selectedRow.reqdate);
+                    $("#rremarks").val(selectedRow.remarks);   
+                    $('#EditReqModal').modal('show');                 
+                }
+                else if(b === 3) {
+                    alertify.confirm("Delete Requirement ?", function (e) {
+                        if (e) {
+                            var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
+                            var selectedRow = selectedRows[0];     
+                            $.get('/deletereq' , { id : selectedRow.id }).done(function(data){
+                                console.log(data);
+                                if(data.status !== undefined ){
+                                    alertify.success('<i class="fa fa-trash"></i> &nbsp; Requirement Deleted');
+
+
+                                    var selectedRows1 =  $('#projtable').bootstrapTable('getSelections');
+                                    var selectedRow1 = selectedRows1[0];
+                                    $.get('/passid' , { id : selectedRow1.id }).done(function(data){
+                                        if(data !== undefined ){
+                                            $('#reqtable').bootstrapTable('refresh' , { url : '/listProjReq1?id=' + data.status} );
+                                        }
+                                    });
+
+
+
+                                }
+                            });
+                        } 
+                    }); 
+                }
+                else if ( b === 4){
+                    var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];                                        
+                    var d = document.getElementById('AddVisitModalForm');
+                    $("#vvid").val(selectedRow.id);
+                    $("#vvprojname").val(selectedRow.projname);                     
+                    $("#vvreqtype").val(selectedRow.reqtype);
+                    $("#vvmeasure").val(selectedRow.measureqty);
+                    $("#vvapprox").val(selectedRow.approx);
+                    $("#vvremarks").val(selectedRow.remarks);     
+                    $("#vprojid").val(selectedRow.proj.id);  
+                    $('#AddVisitModal').modal('show');                 
+                }   
+                else if(b === 5) {
+                    var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];
+                    $.get('/passreqid' , { id : selectedRow.id }).done(function(data){
+                        if(data !== undefined ){
+                            $('#visittable').bootstrapTable('refresh' , { url : '/listreqvisit?id=' + data.status} );
+                        }
+                    });
+                }             
+            }
+        </script>
+
+<script>
+
+    $.get('/statustypelist').done( function(data){
+    $('#rad1').empty();      
+    for(var i = 0 ; i < data.length ; i++){
+      var radi1 = '<input type="radio" id = "' + i +'" value="' + data[i].statustype + '" name="rstatustype" id="rstatustype">&nbsp;' + data[i].statustype + '&nbsp;&nbsp;&nbsp;';
+        document.getElementById('rad1').innerHTML = document.getElementById('rad1').innerHTML + radi1;
+
+    }
+    }); 
+
+</script>        
+
+        <script>
+            $(function () {
+                $('#reqtable').bootstrapTable({
+                    method: 'get',
+                    url: encodeURI('/listcustreq?id=' + '<%= p_cust.id.toString() %>'),
+                    cache: false,
+                    striped: false ,
+                    pagination: true,
+                    search: true,
+                    showRefresh: true,
+                    clickToSelect: true,
+                    pageSize : 5,   
+                    onCheck : function(row){
+                        document.getElementById('btnEditReq').disabled = false ;
+                        document.getElementById('btnDeleteReq').disabled = false ;                        
+                        document.getElementById('btnAddVisit').disabled = false ;          
+                        document.getElementById('btnShowVisit').disabled = false ;          
+                    } ,
+
+                    columns: [{
+                        field: 'state',
+                        radio : true
+                    } , 
+
+                    {
+                        field: 'id',
+                        title: 'Id',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false                 
+                    } ,
+                 
+                    {
+                        field: 'projname',
+                        title: 'Project Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'reqtype',
+                        title: 'Requirement type',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'measureqty',
+                        title: 'Measurement',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                    
+                    {
+                        field: 'approx',
+                        title: 'Approximate value',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                    
+                    {
+                        field: 'reqdate',
+                        title: 'Required date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                    
+                    {
+                        field: 'remarks',
+                        title: 'Remarks',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                    
+
+                    {
+                        field: 'status',
+                        title: 'Status',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } 
+                    
+                    ]
+                });
+            });
+        </script>
+
+
+          </div>
+        </div>
+    </div>
+<div>
+    <div id="visit">
+        <div class="col-lg-12 calibriFont">
+          <div class="well bs-component">
+        <legend>Visit and Follow-up List</legend>
+        <table id="visittable"></table>
+        <br />
+        <div align="right">
+            <button onclick="doVisit(1);" id="btnFpDate" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Add Follow-up Date</button>
+
+        </div>
+        <br />
+        <script>
+            function doVisit(b){
+                if ( b === 1){
+                    var selectedRows =  $('#visittable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];                    
+                    var d = document.getElementById('FpDateModalForm');
+                    $("#fpvisid").val(selectedRow.id);                    
+                    $("#fpprojid").val(selectedRow.proj.id);
+                    $("#fpprojname").val(selectedRow.projname);
+                    $("#fpcusname").val(selectedRow.custname);
+                    $("#fpreqid").val(selectedRow.requi.id);
+                    /*$("#fpsalesexec").val(selectedRow.salesexec.id);
+                    $("#fpmarkexec").val(selectedRow.markexec.id);
+                    $("#fpsexec").val(selectedRow.sexec);
+                    $("#fpmexec").val(selectedRow.mexec);
+                    $("#fpupdatedby").val(selectedRow.updatedby.id);
+                    $("#fpupdby").val(selectedRow.updby);*/
+                    if(selectedRow.status === 'Needs Follow-up')
+                        $('#FpDateModal').modal('show');   
+                    else
+                        alert("Follow-up Date can be added only if the status is Needs Follow-up");              
+                }
+            }
+        </script>
+        
+        <script>
+            $(function () {
+                $('#visittable').bootstrapTable({
+                    method: 'get',
+                    url: encodeURI('/listcustvisit?id=' + '<%= p_cust.id.toString() %>'),
+                    cache: false,
+                    striped: false ,
+                    pagination: true,
+                    search: true,
+                    showRefresh: true,            
+                    clickToSelect: true,
+                    pageSize : 10,  
+                    onCheck : function(row){
+                        document.getElementById('btnFpDate').disabled = false ;
+                    } ,
+                    columns: [{
+                        field: 'state',
+                        radio : true
+                    } , 
+
+                    {
+                        field: 'id',
+                        title: 'Id',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false                 
+                    } ,
+
+                    {
+                        field: 'proj',
+                        title: 'Project ID',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false                 
+                    } ,
+
+                    {
+                        field: 'requi',
+                        title: 'Requirement ID',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false                 
+                    } ,                                        
+
+                   {
+                        field: 'projname',
+                        title: 'Project Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'custname',
+                        title: 'Customer Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'reqtype',
+                        title: 'Requirement Type',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                     {
+                        field: 'measure',
+                        title: 'Measurement',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                     {
+                        field: 'approx',
+                        title: 'Approximate Value',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                     {
+                        field: 'remarks',
+                        title: 'Remarks',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                     {
+                        field: 'status',
+                        title: 'Status',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'sexec',
+                        title: 'Sales Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false                
+                    } ,
+
+                    {
+                        field: 'mexec',
+                        title: 'Marketing Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false 
+                        
+                    } ,
+
+                    {
+                        field: 'updby',
+                        title: 'Updated By',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false 
+                        
+                    } ,
+
+
+                    {
+                        field: 'salesexec',
+                        title: 'Sales Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false ,
+                        visible : false               
+                    } ,
+
+                    {
+                        field: 'markexec',
+                        title: 'Marketing Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false ,
+                        visible : false
+                        
+                    } ,
+
+                    {
+                        field: 'updatedby',
+                        title: 'Updated By',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false ,
+                        visible : false
+                        
+                    } ,
+
+                    {
+                        field: 'fudate',
+                        title: 'Follow-up Date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false 
+                        
+                    }                    
+
+                    ]
+                });
+            });
+        </script>
+
+
+          </div>
+        </div>
+    </div>
+<div>
+    <!--<div id="fp">
+        <div class="col-lg-12 calibriFont">
+          <div class="well bs-component">
+        <legend>Follow-up List</legend>
+        <table id="fptable"></table>
+        <br />
+        <script>
+            $(function () {
+                $('#fptable').bootstrapTable({
+                    method: 'get',
+                    url: encodeURI('/listcustfp?id=' + '<%= p_cust.id.toString() %>'),
+                    cache: false,
+                    striped: false ,
+                    pagination: true,
+                    search: true,
+                    showRefresh: true,
+                    clickToSelect: true,
+                    pageSize : 5,   
+                    columns: [{
+                        field: 'state',
+                        radio : true
+                    } , 
+
+                    {
+                        field: 'id',
+                        title: 'Id',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false                 
+                    } ,
+
+                     {
+                        field: 'salesexec',
+                        title: 'Sales Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false 
+                    } ,
+
+                    {
+                        field: 'markexec',
+                        title: 'Marketing Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: false , 
+                        visible : false 
+                    } ,
+                     {
+                        field: 'custname',
+                        title: 'Customer Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                   {
+                        field: 'projname',
+                        title: 'Project Name',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                     
+                   {
+                        field: 'ftype',
+                        title: 'Follow-up type',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                    {
+                        field: 'fudate',
+                        title: 'Follow-up date',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+
+                     {
+                        field: 'st',
+                        title: 'Status',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                     {
+                        field: 'rm',
+                        title: 'Remarks',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true 
+                    } ,
+                     {
+                        field: 'sexec',
+                        title: 'Sales Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'mexec',
+                        title: 'Marketing Executive',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } 
+                    
+                    ]
+                });
+            });
+        </script>
+
+
+          </div>
+        </div>
+    </div>
+
+</div>-->
+
+
+<div class="modal fade" id="EditReqModal" tabindex="-1" role="dialog" aria-labelledby="Edit Requirement" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Requirement</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="EditReqModalForm" method="post" class="form-horizontal" action="/requpdate">
+                    <div class="form-group">
+                        <input type="hidden" name="rid" id="rid"/>
+                        <input type="hidden" name="cusid" id="cusid" value="<%= p_cust.id.toString() %>"/>
+                        <label class="col-xs-3">Project Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="rprojname"  id="rprojname"  size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Requirement Type</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="rreqtype"  id="rreqtype"  size="30"/>
+                        </div>                        
+                    </div>                    
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Measurement</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="rmeasure"  id="rmeasure" size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Approximate Value</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="rapprox" id="rapprox" size="30"/>
+                        </div>
+                    </div>      
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Requirement Date</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="rreqdate" id="rreqdate" size="30" class="datepicker1"/>
+                        </div>
+                    </div> 
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Remarks</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="rremarks" id="rremarks"  size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button onclick="submitFunc()" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">    
+    function submitFunc()
+    {
+        document.getElementById('EditReqModalForm').submit();
+    }  
+    $('.datepicker1').datepicker({
+      format: 'mm/dd/yyyy'
+    }); 
+</script>
+
+
+<div class="modal fade" id="AddVisitModal" tabindex="-1" role="dialog" aria-labelledby="Add Visit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Visit</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="AddVisitModalForm" method="post" class="form-horizontal" action="/visitadd">
+                    <div class="form-group">
+                        <input type="hidden" name="vvid" id="vvid"/>
+                        <input type="hidden" name="vcusid" id="vcusid" value="<%= p_cust.id.toString() %>"/>
+                        <input type="hidden" name="vprojid" id="vprojid"/>
+                        <label class="col-xs-4">Project Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="vvprojname"  id="vvprojname"  size="30" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-4">Customer Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="vvcusname"  id="vvcusname"  size="30" value="<%= p_cust.custname.toString() %>" readonly/>
+                        </div>                        
+                    </div>                    
+
+                    <div class="form-group">
+                        <label class="col-xs-4">Requirement Type</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="vvreqtype"  id="vvreqtype"  size="30" readonly/>
+                        </div>                        
+                    </div>                    
+
+                    <div class="form-group">
+                        <label class="col-xs-4">Measurement</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="vvmeasure"  id="vvmeasure" size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-4">Approximate Value</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="vvapprox" id="vvapprox" size="30"/>
+                        </div>
+                    </div>      
+
+
+                    <div class="form-group">
+                        <label class="col-xs-4">Remarks</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="vvremarks" id="vvremarks"  size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-4">Status</label>
+                        <div class="col-xs-11" id="rad1">
+                        <button onclick="vsubmitFunc()" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>   
+
+                        <div class="form-group" id="fpdatediv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+                            <label class="col-xs-4">Next Follow-up Date</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="datepicker" name="fpdate" id="fpdate" size="30">
+                            </div>
+                        </div>
+              
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button onclick="vsubmitFunc()" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"> 
+
+
+
+$(function(){
+
+     $('input[type="radio"]').click(function(){
+     if($(rad1).is(":checked")){
+         document.getElementById('fpdatediv').style.display="block";
+        document.getElementById('fpdatediv').style.visibility="visible";
+             }
+             else if($(rad1).is(":not(:checked)")){
+          document.getElementById('fpdatediv').style.display="none";
+         document.getElementById('fpdatediv').style.visibility="hidden"; 
+             }
+
+}
+}
+  
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy'
+    });    
+
+    function vsubmitFunc()
+    {            
+        document.getElementById('AddVisitModalForm').submit();
+    }  
+</script>
+
+
+<div class="modal fade" id="FpDateModal" tabindex="-1" role="dialog" aria-labelledby="Add Follow-up Date" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Follow-up Date</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="FpDateModalForm" method="post" class="form-horizontal" action="/fpvisitadd">
+                    <div class="form-group">
+                        <input type="hidden" name="fpvisid" id="fpvisid"/>
+                        <input type="hidden" name="fpcusid" id="fpcusid" value="<%= p_cust.id.toString() %>"/>
+                        <input type="hidden" name="fpprojid" id="fpprojid"/>
+                        <input type="hidden" name="fpreqid" id="fpreqid"/>
+                        <!--<input type="hidden" name="fpsalesexec" id="fpsalesexec"/>
+                        <input type="hidden" name="fpmarkexec" id="fpmarkexec"/>
+                        <input type="hidden" name="fpsexec" id="fpsexec"/>
+                        <input type="hidden" name="fpmexec" id="fpmexec"/>
+                        <input type="hidden" name="fpupdatedby" id="fpupdatedby"/>
+                        <input type="hidden" name="fpupdby" id="fpupdby"/>-->
+                        <label class="col-xs-4">Next Follow-up Date</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="fpdate"  id="fpdate"  size="30" class="datepicker"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button onclick="fpsubmitFunc()" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript"> 
+
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy'
+    }); 
+  
+    function fpsubmitFunc()
+    {            
+        document.getElementById('FpDateModalForm').submit();
+    }  
+</script>

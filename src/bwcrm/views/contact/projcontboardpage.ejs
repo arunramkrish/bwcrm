@@ -1,0 +1,229 @@
+
+<center><h3><b style="color:red">PROJECT-CONTACTS</b></h3></center>
+<table id="vendortable"></table>
+
+<br />
+
+<center>
+<button onclick="doreq(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add contact to Project</button>
+<button class="btn btn-success" data-toggle="modal" data-target="#AddVendorModal1"><i class="fa fa-plus"></i> &nbsp; Add new contact </button></center>
+<script>
+    <% if( query !== undefined ){
+        if( query.localeCompare('added') === 0 ) { %>
+            alertify.success('<i class="fa fa-plus"></i> &nbsp; contact Added to the project');
+        <% }
+       
+    } %>
+</script>
+
+<script>
+
+    $(function () {       
+        $('#vendortable').bootstrapTable({
+            method: 'get',
+            url: '/listvendors',
+            cache: false,
+            height: 350,
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+            onCheck : function(row){
+                document.getElementById('btnEdit').disabled = false ;
+                document.getElementById('btnDelete').disabled = false ;
+            } ,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'venid',
+                title: 'ID',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } , 
+
+            {
+                field: 'ventype',
+                title: 'Type',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } , 
+
+            {
+                field: 'name',
+                title: 'Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'addr',
+                title: 'Address',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'pincode',
+                title: 'Pin Code',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,       
+
+            {
+                field: 'mobno',
+                title: 'Mobile No',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'llno',
+                title: 'Landline No',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'email',
+                title: 'E-Mail ID',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            }                 
+
+            ]
+
+        });
+
+    });
+
+</script>
+
+<script>
+
+    $.get('/ventypelist').done( function(data){
+    $('#rad').empty();  
+    $('#rad1').empty();      
+    for(var i = 0 ; i < data.length ; i++){
+      var radi = '<input type="radio" value="' + data[i].ventypename + '" name="ventype">&nbsp;' + data[i].ventypename + '&nbsp;&nbsp;&nbsp;';
+      var radi1 = '<input type="radio" id = "' + i +'" value="' + data[i].ventypename + '" name="vventype">&nbsp;' + data[i].ventypename + '&nbsp;&nbsp;&nbsp;';
+      document.getElementById('rad').innerHTML = document.getElementById('rad').innerHTML + radi;
+    document.getElementById('rad1').innerHTML = document.getElementById('rad1').innerHTML + radi1;
+    }
+    }); 
+
+</script>
+
+<script>
+    function doreq(a){
+     if( a === 1 ){
+            window.location = '/vendorboard';
+        }
+    else{
+            var selectedRows =  $('#vendortable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/addctproj?id=" + selectedRow.id);
+            window.location = uri ;
+        }
+    }
+   
+</script>
+<div class="modal fade" id="AddVendorModal1" tabindex="-1" role="dialog" aria-labelledby="Add Vendor" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Contact to project</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="AddVendorModalForm1" method="post" class="form-horizontal" action="\vendoradd">
+                    <div class="form-group">
+                        <label class="col-xs-3">Contact ID</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="venid" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Contact Type</label>
+                        <div class="col-xs-9" id="rad">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Contact Name</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="name" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Address</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="addr"  size="30"/>
+                        </div>
+                    </div>                                                            
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Pin Code</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="pincode" size="30" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Mobile Number</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="mobno" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3">Landline Number</label>
+                        <div class="col-xs-5">
+                            <input type="text"  name="llno"  size="30"/>
+                        </div>
+                    </div>                                                            
+
+                    <div class="form-group">
+                        <label class="col-xs-3">E-Mail ID</label>
+                        <div class="col-xs-5">
+                            <input type="email"  name="email" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

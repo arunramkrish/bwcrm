@@ -1,46 +1,117 @@
 module.exports = {
 
-	//@arg req.param('settings')
-	getSettingsArray : function(settings){
-		var settingsArr = [ "generalsettings" , 
-							"databasecontrolpanel"];
+	//@arg req.param('master')
+	getMasterArray : function(master){
+		var masterArr = [ "conttype" , "pdttype" , "projtype", "stattype"];
 
-		var settings_arr = [ false  , false  ];
-		if( settings === undefined ){
-			return settings_arr;
+		var master_arr = [ false  , false , false , false ];
+		if( master === undefined ){
+			return master_arr;
 		}
-		if( settings instanceof Array ){
-			return PermissionService.arrayBoolify(settingsArr , settings );
+		if( master instanceof Array ){
+			return PermissionService.arrayBoolify(masterArr , master );
 		}
 		else
 		{
-			return PermissionService.stringBoolify(settingsArr , settings);
+			return PermissionService.stringBoolify(masterArr , master);
 		}
 
 	} ,
 
-	
+	//@arg req.param('usermanagement')
+	getUserManagementArray : function(usermanagement){
+		var usermanagementArr = [ "roles" , 
+							"users"];
 
-	//@arg req.param('security')
-	getSecurityArray : function(security){
-		var securityArr = [ "rolespage" , 
-							"userspage" , 
-							"audittrailspage" , 
-							"changepassword" ];
+		var usermanagement_arr = [ false  , false  ];
+		if( usermanagement === undefined ){
+			return usermanagement_arr;
+		}
+		if( usermanagement instanceof Array ){
+			return PermissionService.arrayBoolify(usermanagementArr , usermanagement );
+		}
+		else
+		{
+			return PermissionService.stringBoolify(usermanagementArr , usermanagement);
+		}
 
-		var security_arr = [false ,false , false , false ];
-		if( security === undefined ){
-			return security_arr;
-		}
-		if( security instanceof Array){
-			return PermissionService.arrayBoolify( securityArr , security );
-		}
-		else{
-			return PermissionService.stringBoolify( securityArr , security );
-		}
 	} ,
 
-	
+	//@arg req.param('customer')
+	getCustomerArray : function(customer){
+		var customerArr = [ "cust" , 
+							"searchcust"];
+
+		var customer_arr = [ false  , false  ];
+		if( customer === undefined ){
+			return customer_arr;
+		}
+		if( customer instanceof Array ){
+			return PermissionService.arrayBoolify(customerArr , customer );
+		}
+		else
+		{
+			return PermissionService.stringBoolify(customerArr , customer);
+		}
+
+	} ,
+
+	//@arg req.param('project')
+	getProjectArray : function(project){
+		var projectArr = [ "proj" , 
+							"req" , "visit" , "followup" , "fpactionlog"];
+
+		var project_arr = [ false  , false , false , false , false ];
+		if( project === undefined ){
+			return project_arr;
+		}
+		if( project instanceof Array ){
+			return PermissionService.arrayBoolify(projectArr , project );
+		}
+		else
+		{
+			return PermissionService.stringBoolify(projectArr , project);
+		}
+
+	} ,	
+
+	//@arg req.param('report')
+	getReportArray : function(report){
+		var reportArr = [ "req" , 
+							"reqdate"];
+
+		var report_arr = [ false  , false];
+		if( report === undefined ){
+			return report_arr;
+		}
+		if( report instanceof Array ){
+			return PermissionService.arrayBoolify(reportArr , report );
+		}
+		else
+		{
+			return PermissionService.stringBoolify(reportArr , report);
+		}
+
+	} ,		
+
+	//@arg req.param('contact')
+	getContactArray : function(contact){
+		var contactArr = [ "cont" ];
+
+		var contact_arr = [ false ];
+		if( contact === undefined ){
+			return contact_arr;
+		}
+		if( contact instanceof Array ){
+			return PermissionService.arrayBoolify(contactArr , contact );
+		}
+		else
+		{
+			return PermissionService.stringBoolify(contactArr , contact);
+		}
+
+	} ,	
+
 	arrayBoolify : function( modelArr , reqArr ){
 		var arr_ret = new Array(modelArr.length);
 		for(var i = 0 ; i < modelArr.length ; i ++ ){

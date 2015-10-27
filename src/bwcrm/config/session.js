@@ -9,7 +9,7 @@
  * and auto-save to `req.session` with Socket.io the same way you would with Express.
  *
  * For more information on configuring the session, check out:
- * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.session.html
+ * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.session.html
  */
 
 module.exports.session = {
@@ -21,7 +21,7 @@ module.exports.session = {
   * of your users, forcing them to log in again.                             *
   *                                                                          *
   ***************************************************************************/
-  secret: '479f4d79707b7d51f62ce20480e956b2',
+  secret: '44f9e9e8c837950219b2b80fc48a31be',
 
 
   /***************************************************************************
@@ -32,8 +32,8 @@ module.exports.session = {
   ***************************************************************************/
 
   // cookie: {
-  //   maxAge: 24 * 60 * 60 * 1000
-  // }
+  //   maxAge: 60 * 10000
+  // },
 
   /***************************************************************************
   *                                                                          *
@@ -56,8 +56,8 @@ module.exports.session = {
   // port: 6379,
   // ttl: <redis session TTL in seconds>,
   // db: 0,
-  // pass: <redis auth password>
-  // prefix: 'sess:'
+  // pass: <redis auth password>,
+  // prefix: 'sess:',
 
 
   /***************************************************************************
@@ -67,11 +67,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  adapter: 'mongo',
-  host: 'localhost',
-  port: 27017,
-  db: 'bwcrm1',
-  collection: 'sessions'
+  // adapter: 'mongo',
+  // host: 'localhost',
+  // port: 27017,
+  // db: 'sails',
+  // collection: 'sessions',
 
   /***************************************************************************
   *                                                                          *
