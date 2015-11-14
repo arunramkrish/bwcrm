@@ -11,11 +11,12 @@
 
 module.exports.bootstrap = function(cb) {
 
-	sails.log('Setting up the Data Model');
+  	sails.log('Setting up the Data Model');
 	AutomateService.automateDatabaseEntries();
 	sails.log(sails);
 
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  cb();
+	// It's very important to trigger this callback method when you are finished
+	// with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+	cb();
+	
 };

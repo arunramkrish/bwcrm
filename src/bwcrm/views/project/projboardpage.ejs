@@ -85,8 +85,7 @@
         $('#projtable').bootstrapTable({
             method: 'get',
             url: '/listproj',
-            cache: false,
-            height: 500,
+            cache: false,            
             striped: false ,
             pagination: false,
             search: true,
@@ -138,14 +137,7 @@
                 valign: 'middle',
                 sortable: true
             } , 
-            {
-                field: 'calltype',
-                title: 'Call Type',
-                align: 'left',
-                valign: 'middle',
-                sortable: true
-            } , 
-
+            
             {
                 field: 'description',
                 title: 'Description',

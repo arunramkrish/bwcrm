@@ -154,7 +154,9 @@ module.exports = {
 	} , 
 
 	fuAddPage : function( req , res ) {
-
+		if (!req.param('id')) {
+			console.log("Project id is not passed");
+		}
 		Project.findOne({id : req.param('id')}).exec(function(err , sproj){
 		if(err)
 			ErrorService.reportError(err , res);

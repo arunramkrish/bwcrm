@@ -37,7 +37,8 @@ module.exports = {
 								mexec : muser.ename 
 							}).exec(function(err , cust){
 								sails.log('Customer Created : ' + cust.custname);	
-								return res.redirect('/projadd?id=' + cust.id);		
+								//return res.redirect('/projadd?id=' + cust.id);	
+								return res.redirect('/customer/custboardpage');	
 							});
 						});
 					});	
@@ -61,7 +62,8 @@ module.exports = {
 							mexec : muser.ename 
 						}).exec(function(err , cust){
 							sails.log('Customer Created : ' + cust.custname);	
-							return res.redirect('/projadd?id=' + cust.id);		
+							//return res.redirect('/projadd?id=' + cust.id);		
+							return res.redirect('/customer/custboardpage');	
 						});
 					});
 				}
@@ -84,7 +86,8 @@ module.exports = {
 							mexec : ''
 						}).exec(function(err , cust){
 							sails.log('Customer Created : ' + cust.custname);	
-							return res.redirect('/projadd?id=' + cust.id);		
+							//return res.redirect('/projadd?id=' + cust.id);		
+							return res.redirect('/customer/custboardpage');	
 						});
 					});	
 				}
@@ -144,7 +147,7 @@ module.exports = {
 	//Page Renderer
 
 	custBoardPage : function( req , res ) {
-		return res.view('customer/custboardpage' , { query : req.param('q')});
+		return res.view('customer/custboardpage' , { p_cust : '1', query : req.param('q')});
 	} , 
 
 	custAddPage : function( req , res ) { 
@@ -177,7 +180,7 @@ module.exports = {
 		return res.view('customer/custsearch' , { query : req.param('q')});
 	} ,
 
-	custSearch :  function ( req , res ) {				
+	custSearch :  function ( req , res ) {	
 		Customer.findOne(
 			{
 				$or: [
@@ -190,16 +193,15 @@ module.exports = {
 					]
 			}
 			).exec(function(err , cust){
-			//sails.log(cust.custname);
 			if(err)
 				ErrorService.reportError(err , res);
 			if(cust === undefined || cust === null)
 			{					
-				return res.view('customer/custsearchresult' , { p_cust : '1', query : req.param('q') } );	
+				return res.view('customer/custboardpage' , { p_cust : '1', query : req.param('q') } );	
 			}
 			else
 			{
-				return res.view('customer/custsearchresult' , { p_cust : cust.id, query : req.param('q') } );
+				return res.view('customer/custboardpage' , { p_cust : cust.id, query : req.param('q') } );
 			}
 		});
 	} ,	
@@ -226,11 +228,21 @@ module.exports = {
 		}
 		else
 		{
-			return res.json();
+			Customer.find().populateAll().exec(function(err , cust){
+				if(err)
+					ErrorService.reportError(err , res);					
+				else
+				{
+					for(var i =0 ; i < cust.length ; i ++){
+						cust[i].createdAt = DateService.getFormattedDate(cust[i].createdAt);					
+						cust[i].updatedAt = DateService.getFormattedDate(cust[i].updatedAt);	
+					}
+					return res.json(cust);
+				}
+			});
 		}
 	} ,
 
-	
 	DetailBoardPage : function( req , res ) {
 		Customer.findOne({ id : req.param('id')}).exec(function(err , scust){
 			if(err)
@@ -238,9 +250,5 @@ module.exports = {
 			return res.view('customer/detailboardpage' , { p_cust : scust, query : req.param('q') } );
 		});
 	} 	
-
-
-
-	
 
 }; 

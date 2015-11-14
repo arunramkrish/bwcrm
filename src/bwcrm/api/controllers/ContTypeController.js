@@ -28,7 +28,6 @@ module.exports = {
 		});
 	} ,
 		
-
 	listContTypes : function ( req , res ) { 		
 		ContType.find().populateAll().exec(function(err , conttypes){
 			if(err)
@@ -42,19 +41,18 @@ module.exports = {
 
     contTypeUpdate : function ( req , res ) {
         ContType.findOne({ id : req.param('cid')}).exec(function(err , myContType){
+            if(err)
+                return res.json({ error : err });
+            ContType.update({
+                id : req.param('cid')
+            } ,
+            {
+			  	conttypename : req.param('cconttypename') 
+            }).exec(function(err , conttype){
                 if(err)
-                    return res.json({ error : err });
-                ContType.update({
-                    id : req.param('cid')
-                } ,
-                {
-				  	conttypename : req.param('cconttypename') 
-                }).exec(function(err , conttype){
-                    if(err)
-                        ErrorService.reportError(err , res);                                            
-                    return res.redirect('/ContTypeboard?q=updated');  
-                });                 
-
+                    ErrorService.reportError(err , res);                                            
+                return res.redirect('/ContTypeboard?q=updated');  
+            });                 
         });
     } ,
 
@@ -65,7 +63,6 @@ module.exports = {
 			else 
 				return res.json({ status : 'OK' })
 		});
-
 	} ,
 
 	//Page Renderer

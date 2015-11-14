@@ -159,6 +159,15 @@
     $('.datepicker').datepicker({
       format: 'mm/dd/yyyy'
     });
+
+    $('#doj').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });    
+
+    $('#dor').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
+
   });
 
   function checkPass()

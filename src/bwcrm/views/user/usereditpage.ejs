@@ -144,5 +144,14 @@
     $('.datepicker').datepicker({
       dateFormat: 'dd/mm/yy'
     });
+
+    $('#doj').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });    
+
+    $('#dor').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
+    
   });
 </script>

@@ -27,7 +27,6 @@ module.exports = {
 			}
 		});
 	} ,
-		
 
 	listProjTypes : function ( req , res ) { 		
 		ProjType.find().populateAll().exec(function(err , projtypes){
@@ -42,19 +41,18 @@ module.exports = {
 
     projTypeUpdate : function ( req , res ) {
         ProjType.findOne({ id : req.param('pid')}).exec(function(err , myprojType){
+            if(err)
+                return res.json({ error : err });
+            ProjType.update({
+                id : req.param('pid')
+            } ,
+            {
+			  	projtype : req.param('pprojtype') 
+            }).exec(function(err , projtyp){
                 if(err)
-                    return res.json({ error : err });
-                ProjType.update({
-                    id : req.param('pid')
-                } ,
-                {
-				  	projtype : req.param('pprojtype') 
-                }).exec(function(err , projtyp){
-                    if(err)
-                        ErrorService.reportError(err , res);                                            
-                    return res.redirect('/projTypeboard?q=updated');  
-                });                 
-
+                    ErrorService.reportError(err , res);                                            
+                return res.redirect('/projTypeboard?q=updated');  
+            });                 
         });
     } ,
 

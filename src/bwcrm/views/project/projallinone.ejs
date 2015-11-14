@@ -3,6 +3,7 @@
     <form id="myform" class="form-horizontal" method="post" action="/projreqadd">
       <fieldset>
         <legend>Project</legend>
+        <br>
         <% if( query !== undefined ){
           if( query.localeCompare('alreadythere') === 0 ) { %>
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -107,6 +108,7 @@
         </div>    
 
         <legend>Requirement</legend>
+        <br>
 
         <!-- Requirement Type -->
         <div class="form-group"  >            
@@ -351,6 +353,7 @@
     </div>  
 
 
+
         <!-- Save button -->
         <div class="form-group" style="<%= formGroup %>">
           <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
@@ -365,6 +368,8 @@
 
   </div>
 </div>
+
+
   
 <script type="text/javascript">
   
@@ -436,10 +441,37 @@ function submitFunc1()
       format: 'mm/dd/yyyy'
     });    
    
+    $('#startdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });    
 
+    $('#enddate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
   
+    $('#chimreqdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });    
 
+    $('#solreqdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });  
 
+    $('#wtilereqdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });    
+
+    $('#ftilereqdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
+  
+    $('#sanitreqdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });    
+
+    $('#pipereqdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });  
   
 });
                                                      

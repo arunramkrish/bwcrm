@@ -28,7 +28,6 @@ module.exports = {
 		});
 	} ,
 		
-
 	listPdtTypes : function ( req , res ) { 		
 		PdtType.find().populateAll().exec(function(err , pdttypes){
 			if(err)
@@ -42,19 +41,18 @@ module.exports = {
 
     pdtTypeUpdate : function ( req , res ) {
         PdtType.findOne({ id : req.param('pid')}).exec(function(err , myPdtType){
+            if(err)
+                return res.json({ error : err });
+            PdtType.update({
+                id : req.param('pid')
+            } ,
+            {
+			  	pdttype : req.param('ppdttype') 
+            }).exec(function(err , pdttyp){
                 if(err)
-                    return res.json({ error : err });
-                PdtType.update({
-                    id : req.param('pid')
-                } ,
-                {
-				  	pdttype : req.param('ppdttype') 
-                }).exec(function(err , pdttyp){
-                    if(err)
-                        ErrorService.reportError(err , res);                                            
-                    return res.redirect('/PdtTypeboard?q=updated');  
-                });                 
-
+                    ErrorService.reportError(err , res);                                            
+                return res.redirect('/PdtTypeboard?q=updated');  
+            });                 
         });
     } ,
 

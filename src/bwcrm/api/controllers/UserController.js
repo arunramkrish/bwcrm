@@ -12,6 +12,7 @@ module.exports = {
 	signup :  function ( req , res ) {
 		User.count({ username : req.param('username')}).exec(function ( err , count ){
 			if(err)
+
 				ErrorService.reportError(err , res);				
 			if(count === 0)
 			{
@@ -67,24 +68,6 @@ module.exports = {
 							Role.findOne({id:found.role}).exec(function(err,myrole){
 								req.session.currentrole=myrole;
 								sails.log('Login success');
-
-		/*e = new Date();
-		d = (e.getMonth() + 1) + '/' + e.getDate() + '/' + e.getFullYear();
-		sails.log(d);
-		sails.log(new Date(d).toString());		
-		Visit.find({fpdate : new Date('d').toString()}).populateAll().exec(function(err , vts){
-			if(err)
-				ErrorService.reportError(err , res);					
-			else
-			{					
-				return res.redirect('/dashboard' , { p_fp : vts });
-			}
-
-		});*/
-
-
-
-
 		 						return res.redirect('/dashboard');
 	 						});
 						}
@@ -201,6 +184,10 @@ module.exports = {
 				delete user.password ;		
 				user.doj = DateService.getFormattedDate(user.doj);					
 				user.dor = DateService.getFormattedDate(user.dor);
+				if (user.doj === 'NaN/NaN/NaN')
+						user.doj = '';
+				if (user.dor === 'NaN/NaN/NaN')
+						user.dor = '';
 				return res.view('user/usereditpage' , { roles : myroles , p_user : user , query : req.param('q') } );
 			});
 		});

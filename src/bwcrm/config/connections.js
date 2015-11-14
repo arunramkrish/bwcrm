@@ -58,11 +58,11 @@ module.exports.connections = {
   ***************************************************************************/
   mongoDB: {
     adapter: 'sails-mongo',
-    host: '127.0.0.1',
+    host: 'localhost',
     port: 27017,
     // user: 'username',
     // password: 'password',
-    database: 'bwcrmnewDB'
+    database: 'bwcrmDB'
   },
 
   /***************************************************************************

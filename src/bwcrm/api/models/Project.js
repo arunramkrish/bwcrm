@@ -53,21 +53,6 @@ module.exports = {
     buildstage : {
       type : 'string' ,
       required : false 
-    } ,
-
-    contid : {
-      type : 'string' ,
-      required : false 
-    } ,
-
-    conttype : {
-      type : 'string' ,
-      required : false 
-    } ,
-
-    contname : {
-      type : 'string' ,
-      required : false 
     } 
 
   }

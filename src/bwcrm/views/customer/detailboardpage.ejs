@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/styles/datepicker.css">
 <script src="/js/bootstrap-datepicker.js"></script>
-<center><h3><b style="color:red">CUSTOMER :</b><b style="color:blue"><%= p_cust.custname %> </b><b style="color:red">- PROJECT DETAILS</b></h3></center><br>
+<center><h3><b style="color:red">CUSTOMER :</b><b style="color:blue"><%= p_cust.custname %> </b><b style="color:red">- PROJECT DETAILS</b></h3></center>
 <script>
     <% if( query !== undefined ){
         if( query.localeCompare('added') === 0 ) { %>
@@ -11,7 +11,7 @@
         <% }
     } %>
 </script>
-<br>
+
 <div>
     <div id="proj">
         <div class="col-lg-12 calibriFont" style="bgcolor:white">
@@ -25,7 +25,7 @@
             <button onclick="doProj(3);" id="btnDeleteProj" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
             <button onclick="doProj(4);" id="btnShowReq" class="btn btn-info" disabled><i class="fa fa-list"></i> &nbsp; Show Requirements</button>
         </div>
-        <br />
+        
         <script>
             function doProj(a){
                 if ( a === 1) 
@@ -167,7 +167,7 @@
           <div class="well bs-component">
         <legend>Requirements List</legend>
         <table id="reqtable"></table>
-        <br />
+        
         <div align="right">
             <button onclick="doReq(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
             <button onclick="doReq(2);" id="btnEditReq" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
@@ -175,7 +175,7 @@
             <button onclick="doReq(4);" id="btnAddVisit" class="btn btn-info" disabled><i class="fa fa-trash"></i> &nbsp; Add Visit</button>            
             <button onclick="doReq(5);" id="btnShowVisit" class="btn btn-warning" disabled><i class="fa fa-trash"></i> &nbsp; Show Visit</button> 
         </div>
-        <br />
+        
         <script>
             function doReq(b){
                 if ( b === 1) 
@@ -367,12 +367,12 @@
           <div class="well bs-component">
         <legend>Visit and Follow-up List</legend>
         <table id="visittable"></table>
-        <br />
+        
         <div align="right">
             <button onclick="doVisit(1);" id="btnFpDate" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Add Follow-up Date</button>
 
         </div>
-        <br />
+        
         <script>
             function doVisit(b){
                 if ( b === 1){
@@ -581,7 +581,7 @@
           <div class="well bs-component">
         <legend>Follow-up List</legend>
         <table id="fptable"></table>
-        <br />
+        
         <script>
             $(function () {
                 $('#fptable').bootstrapTable({
@@ -776,6 +776,10 @@
     $('.datepicker1').datepicker({
       format: 'mm/dd/yyyy'
     }); 
+
+    $('#rreqdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    }); 
 </script>
 
 
@@ -843,14 +847,6 @@
                         <button onclick="vsubmitFunc()" class="btn btn-primary">Add</button>
                         </div>
                     </div>   
-
-                        <div class="form-group" id="fpdatediv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
-                            <label class="col-xs-4">Next Follow-up Date</label>
-                            <div class="col-xs-5">
-                                <input type="text" class="datepicker" name="fpdate" id="fpdate" size="30">
-                            </div>
-                        </div>
-              
 
                     <div class="form-group">
                         <div class="col-xs-5 col-xs-offset-3">
@@ -940,6 +936,10 @@ $(function(){
 
     $('.datepicker').datepicker({
       format: 'mm/dd/yyyy'
+    }); 
+
+    $('#fpdate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
     }); 
   
     function fpsubmitFunc()

@@ -28,7 +28,6 @@ module.exports = {
 		});
 	} ,
 		
-
 	listStatusTypes : function ( req , res ) { 		
 		StatusType.find().populateAll().exec(function(err , sttypes){
 			if(err)
@@ -65,7 +64,6 @@ module.exports = {
 			else 
 				return res.json({ status : 'OK' })
 		});
-
 	} ,
 
 	//Page Renderer
