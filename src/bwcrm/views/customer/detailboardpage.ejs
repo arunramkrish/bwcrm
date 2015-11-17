@@ -24,6 +24,8 @@
             <button onclick="doProj(2);" id="btnEditProj" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
             <button onclick="doProj(3);" id="btnDeleteProj" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
             <button onclick="doProj(4);" id="btnShowReq" class="btn btn-info" disabled><i class="fa fa-list"></i> &nbsp; Show Requirements</button>
+            <button onclick="doProj(5);" id="btnAddVisit" class="btn btn-info" disabled><i class="fa fa-trash"></i> &nbsp; Add Visit</button>            
+            <button onclick="doProj(6);" id="btnShowVisit" class="btn btn-warning" disabled><i class="fa fa-trash"></i> &nbsp; Show Visit</button> 
         </div>
         
         <script>
@@ -62,6 +64,33 @@
                             }
                         });
                 }
+                else if ( a === 5){
+                    /*var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];                                        
+                    var d = document.getElementById('AddVisitModalForm');
+                    $("#vvid").val(selectedRow.id);
+                    $("#vvprojname").val(selectedRow.projname);                     
+                    $("#vvreqtype").val(selectedRow.reqtype);
+                    $("#vvmeasure").val(selectedRow.measureqty);
+                    $("#vvapprox").val(selectedRow.approx);
+                    $("#vvremarks").val(selectedRow.remarks);     
+                    $("#vprojid").val(selectedRow.proj.id);  
+                    $('#AddVisitModal').modal('show');    */             
+
+                    var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];
+                    var uri = encodeURI("/visitadd?id=" + selectedRow.id);
+                    window.location = uri ;
+                }   
+                else if(a === 6) {
+                    var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+                    var selectedRow = selectedRows[0];
+                    $.get('/passprojid' , { id : selectedRow.id }).done(function(data){
+                        if(data !== undefined ){
+                            $('#visittable').bootstrapTable('refresh' , { url : '/listprojvisit?id=' + data.status} );
+                        }
+                    });
+                }
             }
         </script>
         <script>
@@ -79,7 +108,9 @@
                     onCheck : function(row){
                         document.getElementById('btnEditProj').disabled = false ;
                         document.getElementById('btnDeleteProj').disabled = false ;                        
-                        document.getElementById('btnShowReq').disabled = false ;    
+                        document.getElementById('btnShowReq').disabled = false ; 
+                        document.getElementById('btnAddVisit').disabled = false ;          
+                        document.getElementById('btnShowVisit').disabled = false ;      
                     } ,
                     columns: [{
                         field: 'state',
@@ -169,11 +200,11 @@
         <table id="reqtable"></table>
         
         <div align="right">
-            <button onclick="doReq(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
-            <button onclick="doReq(2);" id="btnEditReq" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
+            <!--<button onclick="doReq(1);" class="btn btn-success"><i class="fa fa-plus"></i> &nbsp; Add</button>
+            <button onclick="doReq(2);" id="btnEditReq" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>-->
             <button onclick="doReq(3);" id="btnDeleteReq" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
-            <button onclick="doReq(4);" id="btnAddVisit" class="btn btn-info" disabled><i class="fa fa-trash"></i> &nbsp; Add Visit</button>            
-            <button onclick="doReq(5);" id="btnShowVisit" class="btn btn-warning" disabled><i class="fa fa-trash"></i> &nbsp; Show Visit</button> 
+            <button onclick="doReq(4);" id="btnShowVisit1" class="btn btn-warning" disabled><i class="fa fa-trash"></i> &nbsp; Show Visit</button>
+            
         </div>
         
         <script>
@@ -224,20 +255,7 @@
                         } 
                     }); 
                 }
-                else if ( b === 4){
-                    var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
-                    var selectedRow = selectedRows[0];                                        
-                    var d = document.getElementById('AddVisitModalForm');
-                    $("#vvid").val(selectedRow.id);
-                    $("#vvprojname").val(selectedRow.projname);                     
-                    $("#vvreqtype").val(selectedRow.reqtype);
-                    $("#vvmeasure").val(selectedRow.measureqty);
-                    $("#vvapprox").val(selectedRow.approx);
-                    $("#vvremarks").val(selectedRow.remarks);     
-                    $("#vprojid").val(selectedRow.proj.id);  
-                    $('#AddVisitModal').modal('show');                 
-                }   
-                else if(b === 5) {
+                else if(b === 4) {
                     var selectedRows =  $('#reqtable').bootstrapTable('getSelections');
                     var selectedRow = selectedRows[0];
                     $.get('/passreqid' , { id : selectedRow.id }).done(function(data){
@@ -275,10 +293,9 @@
                     clickToSelect: true,
                     pageSize : 5,   
                     onCheck : function(row){
-                        document.getElementById('btnEditReq').disabled = false ;
+                        /*document.getElementById('btnEditReq').disabled = false ;*/
                         document.getElementById('btnDeleteReq').disabled = false ;                        
-                        document.getElementById('btnAddVisit').disabled = false ;          
-                        document.getElementById('btnShowVisit').disabled = false ;          
+                        document.getElementById('btnShowVisit1').disabled = false ;          
                     } ,
 
                     columns: [{
@@ -369,7 +386,7 @@
         <table id="visittable"></table>
         
         <div align="right">
-            <button onclick="doVisit(1);" id="btnFpDate" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Add Follow-up Date</button>
+            <!--<button onclick="doVisit(1);" id="btnFpDate" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Add Follow-up Date</button>-->
 
         </div>
         
@@ -470,7 +487,7 @@
                     } ,
 
                      {
-                        field: 'measure',
+                        field: 'measureqty',
                         title: 'Measurement',
                         align: 'left',
                         valign: 'middle',
@@ -519,16 +536,6 @@
                     } ,
 
                     {
-                        field: 'updby',
-                        title: 'Updated By',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: false 
-                        
-                    } ,
-
-
-                    {
                         field: 'salesexec',
                         title: 'Sales Executive',
                         align: 'left',
@@ -557,14 +564,7 @@
                         
                     } ,
 
-                    {
-                        field: 'fudate',
-                        title: 'Follow-up Date',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: false 
-                        
-                    }                    
+                                      
 
                     ]
                 });
@@ -575,25 +575,25 @@
           </div>
         </div>
     </div>
-<div>
-    <!--<div id="fp">
+<!--<div>
+    <div id="fp">
         <div class="col-lg-12 calibriFont">
           <div class="well bs-component">
-        <legend>Follow-up List</legend>
-        <table id="fptable"></table>
+        <legend>Contact List</legend>
+        <table id="conttable"></table>
         
         <script>
             $(function () {
-                $('#fptable').bootstrapTable({
+               $('#conttable').bootstrapTable({
                     method: 'get',
-                    url: encodeURI('/listcustfp?id=' + '<%= p_cust.id.toString() %>'),
-                    cache: false,
+                    url: '/listprojvendors',
+                    cache: false,            
                     striped: false ,
-                    pagination: true,
+                    pagination: false,
                     search: true,
                     showRefresh: true,
                     clickToSelect: true,
-                    pageSize : 5,   
+
                     columns: [{
                         field: 'state',
                         radio : true
@@ -605,90 +605,77 @@
                         align: 'left',
                         valign: 'middle',
                         sortable: false , 
-                        visible : false                 
-                    } ,
-
-                     {
-                        field: 'salesexec',
-                        title: 'Sales Executive',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: false , 
                         visible : false 
                     } ,
 
                     {
-                        field: 'markexec',
-                        title: 'Marketing Executive',
+                        field: 'venid',
+                        title: 'ID',
                         align: 'left',
                         valign: 'middle',
-                        sortable: false , 
-                        visible : false 
-                    } ,
-                     {
-                        field: 'custname',
-                        title: 'Customer Name',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: true 
-                    } ,
-
-                   {
-                        field: 'projname',
-                        title: 'Project Name',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: true 
-                    } ,
-                     
-                   {
-                        field: 'ftype',
-                        title: 'Follow-up type',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: true 
-                    } ,
+                        sortable: true
+                    } , 
 
                     {
-                        field: 'fudate',
-                        title: 'Follow-up date',
+                        field: 'ventype',
+                        title: 'Type',
                         align: 'left',
                         valign: 'middle',
-                        sortable: true 
-                    } ,
+                        sortable: true
+                    } , 
 
-                     {
-                        field: 'st',
-                        title: 'Status',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: true 
-                    } ,
-                     {
-                        field: 'rm',
-                        title: 'Remarks',
-                        align: 'left',
-                        valign: 'middle',
-                        sortable: true 
-                    } ,
-                     {
-                        field: 'sexec',
-                        title: 'Sales Executive',
+                    {
+                        field: 'name',
+                        title: 'Name',
                         align: 'left',
                         valign: 'middle',
                         sortable: true
                     } ,
 
                     {
-                        field: 'mexec',
-                        title: 'Marketing Executive',
+                        field: 'addr',
+                        title: 'Address',
                         align: 'left',
                         valign: 'middle',
                         sortable: true
-                    } 
-                    
+                    } ,
+
+                    {
+                        field: 'pincode',
+                        title: 'Pin Code',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,       
+
+                    {
+                        field: 'mobno',
+                        title: 'Mobile No',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'llno',
+                        title: 'Landline No',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    } ,
+
+                    {
+                        field: 'email',
+                        title: 'E-Mail ID',
+                        align: 'left',
+                        valign: 'middle',
+                        sortable: true
+                    }                 
+
                     ]
+
                 });
+
             });
         </script>
 
@@ -699,74 +686,6 @@
 
 </div>-->
 
-
-<div class="modal fade" id="EditReqModal" tabindex="-1" role="dialog" aria-labelledby="Edit Requirement" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Edit Requirement</h4>
-            </div>
-
-            <div class="modal-body">
-                <form id="EditReqModalForm" method="post" class="form-horizontal" action="/requpdate">
-                    <div class="form-group">
-                        <input type="hidden" name="rid" id="rid"/>
-                        <input type="hidden" name="cusid" id="cusid" value="<%= p_cust.id.toString() %>"/>
-                        <label class="col-xs-3">Project Name</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="rprojname"  id="rprojname"  size="30"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Requirement Type</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="rreqtype"  id="rreqtype"  size="30"/>
-                        </div>                        
-                    </div>                    
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Measurement</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="rmeasure"  id="rmeasure" size="30"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Approximate Value</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="rapprox" id="rapprox" size="30"/>
-                        </div>
-                    </div>      
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Requirement Date</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="rreqdate" id="rreqdate" size="30" class="datepicker1"/>
-                        </div>
-                    </div> 
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Remarks</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="rremarks" id="rremarks"  size="30"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button onclick="submitFunc()" class="btn btn-primary">Update</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script type="text/javascript">    
     function submitFunc()

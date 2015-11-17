@@ -109,6 +109,21 @@ module.exports = {
 		});
 	} ,
 
+	listProjVendors: function ( req , res ) {	
+		Requ.find({ proj : req.param('id')  }).populateAll().exec(function(err , requ){
+			if(err)
+				ErrorService.reportError(err , res);					
+			else
+			{
+				for(var i =0 ; i < requ.length ; i ++){
+					requ[i].reqdate = DateService.getFormattedDate(requ[i].reqdate);					
+				}
+				return res.json(requ);
+			}
+		});
+	} ,
+
+
 	projUpdate : function ( req , res ) { 
 	
 		Project.update({
@@ -340,7 +355,25 @@ module.exports = {
 	} ,
 
 	projReqAdd :  function (req , res ) {
-		
+		if(req.param('contid')!== ''){
+			Vendor.create({
+				  	venid : req.param('contid') ,
+				  	ventype : req.param('conttype') ,
+				  	name : req.param('contname') ,
+				    addr : req.param('contaddr') ,
+				    pincode : req.param('contpin') ,
+				  	mobno : req.param('contmobno') ,
+				    llno : req.param('contllno') ,
+				    email : req.param('contemail') 
+				}).exec(function(err , vend){
+					vid = vend.id;
+					sails.log('Vendor Created : ' + vend.id);
+				});
+		}
+		else
+		{
+			vid=req.param('contid1');
+		}
 		ProjType.findOne({ id : req.param('projtype')}).exec(function(err , myprojtype){
 			if(err)
 				ErrorService.reportError(err , res);	
@@ -362,7 +395,8 @@ module.exports = {
 			    			startdate : new Date(req.param('startdate')).toString(),
 			    			enddate : new Date(req.param('enddate')).toString(),
 					    	addr : req.param('addr') ,
-					    	buildstage : req.param('buildstage') 
+					    	buildstage : req.param('buildstage') ,
+					    	contid : vid
 						}).exec(function(err , proj){
 							sails.log('Project Created : ' + proj.projname );
 							//return res.redirect('/reqadd?id=' + proj.id);		
@@ -664,6 +698,23 @@ module.exports = {
 		});
 	}	,
 
-	
+	ConatctBoardPage : function( req , res ) {
+		Project.findOne({ id : req.param('id')}).exec(function(err , myproj){
+			if(err)
+				ErrorService.reportError(err , res);	
+			return res.view('vendor/vendorboardpage1' , { p_proj : myproj, query : req.param('q') } );
+		});
+	} ,
+
+	listProjContacts : function ( req , res ) {	
+		Vendor.find({ id : req.param('id') }).populateAll().exec(function(err , vendor){
+			if(err)
+				ErrorService.reportError(err , res);					
+			else
+			{
+				return res.json(vendor);
+			}
+		});
+	} ,
 
 }; 

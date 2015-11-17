@@ -53,6 +53,11 @@ module.exports = {
     buildstage : {
       type : 'string' ,
       required : false 
+    } ,
+
+    contid : {
+      type : 'string' ,
+      required : false 
     } 
 
   }

@@ -4,7 +4,6 @@
 <br />
 
 <center>
-<button class="btn btn-success" data-toggle="modal" data-target="#AddVendorModal"><i class="fa fa-plus"></i> &nbsp; Add</button>
 
 <button onclick="doVendor(1);"  id="btnEdit" class="btn btn-primary" disabled ><i class="fa fa-edit"></i> &nbsp; Edit</button>
 
@@ -13,25 +12,11 @@
 </center>
 
 <script>
-    <% if( query !== undefined ){
-        if( query.localeCompare('added') === 0 ) { %>
-            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Contact Added');
-        <% }
-        else if(query.localeCompare('updated') === 0 ) { %>
-            alertify.success('<i class="fa fa-thumbs-up"></i> &nbsp; Contact Updated');  
-        <% }  
-        else if(query.localeCompare('alreadythere') === 0 ) { %>
-            alertify.error('<i class="fa fa-thumbs-down"></i> &nbsp; contact Exists');  
-        <% }               
-    } %>
-</script>
-
-<script>
 
     $(function () {
        $('#vendortable').bootstrapTable({
             method: 'get',
-            url: '/listvendors',
+            url: encodeURI('/listprojcontacts?id=' + '<%= p_proj.contid.toString() %>'),
             cache: false,            
             striped: false ,
             pagination: false,
@@ -132,12 +117,9 @@
 <script>
 
     $.get('/ventypelist').done( function(data){
-    $('#rad').empty();  
     $('#rad1').empty();      
     for(var i = 0 ; i < data.length ; i++){
-      var radi = '<input type="radio" value="' + data[i].conttypename + '" name="ventype">&nbsp;' + data[i].conttypename + '&nbsp;&nbsp;&nbsp;';
       var radi1 = '<input type="radio" id = "' + i +'" value="' + data[i].conttypename + '" name="vventype">&nbsp;' + data[i].conttypename + '&nbsp;&nbsp;&nbsp;';
-      document.getElementById('rad').innerHTML = document.getElementById('rad').innerHTML + radi;
         document.getElementById('rad1').innerHTML = document.getElementById('rad1').innerHTML + radi1;
     }
     }); 
@@ -199,85 +181,6 @@
 
 </script>
 
-<div class="modal fade" id="AddVendorModal" tabindex="-1" role="dialog" aria-labelledby="Add Vendor" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Add Contact</h4>
-            </div>
-
-            <div class="modal-body">
-                <form id="AddVendorModalForm" method="post" class="form-horizontal" action="\vendoradd">
-                    <div class="form-group">
-                        <label class="col-xs-3">Contact ID</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="venid" required size="30"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Contact Type</label>
-                        <div class="col-xs-9" id="rad">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Contact Name</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="name" required size="30"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Address</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="addr"  size="30"/>
-                        </div>
-                    </div>                                                            
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Pin Code</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="pincode" size="30" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Mobile Number</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="mobno" required size="30"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-xs-3">Landline Number</label>
-                        <div class="col-xs-5">
-                            <input type="text"  name="llno"  size="30"/>
-                        </div>
-                    </div>                                                            
-
-                    <div class="form-group">
-                        <label class="col-xs-3">E-Mail ID</label>
-                        <div class="col-xs-5">
-                            <input type="email"  name="email" required size="30"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-primary">Add</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <div class="modal fade" id="EditVendorModal" tabindex="-1" role="dialog" aria-labelledby="Edit Vendor" aria-hidden="true">
     <div class="modal-dialog">
@@ -290,7 +193,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="EditVendorModalForm" method="post" class="form-horizontal" action="\vendorupdate">
+                <form id="EditVendorModalForm" method="post" class="form-horizontal" action="\vendorupdate1">
                     <div class="form-group">
                         <input type="hidden" name="vid" id="vid"/>
                         <label class="col-xs-3">Contact ID</label>

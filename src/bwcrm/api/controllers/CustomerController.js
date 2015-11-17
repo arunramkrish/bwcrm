@@ -172,6 +172,7 @@ module.exports = {
 				ErrorService.reportError(err , res);
 			scust.createdAt = DateService.getFormattedDate(scust.createdAt);					
 			scust.updatedAt = DateService.getFormattedDate(scust.updatedAt);	
+			sails.log(scust.custname);
 			return res.view('customer/custeditpage' , { p_cust : scust , query : req.param('q') } );
 		});
 	} ,

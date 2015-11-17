@@ -16,8 +16,7 @@
                 $('#projtable').bootstrapTable({
                     method: 'get',
                     url: encodeURI('/listcustproj?id=' + '<%= p_cust.id.toString() %>'),
-                    cache: false,
-                    height: 500,
+                    cache: false,                    
                     striped: false ,
                     pagination: false,
                     search: true,

@@ -1,6 +1,6 @@
 <div class="col-lg-12 calibriFont">
   <div class="well bs-component">
-    <form id="myform" class="form-horizontal" method="post" action="/projreqadd">
+    <form id="myform" class="form-horizontal" method="post" action='\projreqadd'>
       <fieldset>
         <legend>Project</legend>
         <br>
@@ -350,8 +350,204 @@
             <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="piperemarks" id="piperemarks" >
           </div>
         </div>   
-    </div>  
+      </div>
+<legend>&nbsp;&nbsp;Contact Details</legend>
 
+<table id="vendortable"></table>
+
+<br />
+
+<center>
+<button class="btn btn-success" onclick="doVendor(1);" ><i class="fa fa-plus"></i> &nbsp; Add New Contact</button>
+<button class="btn btn-success" onclick="doVendor(2);" disabled id="btnassociate"><i class="fa fa-plus"></i> &nbsp; Add Existing Contact to Project</button>
+</center>
+<script>
+
+    $(function () {
+       $('#vendortable').bootstrapTable({
+            method: 'get',
+            url: '/listvendors',
+            cache: false,            
+            striped: false ,
+            pagination: false,
+            search: true,
+            showRefresh: true,
+            clickToSelect: true,
+            onCheck : function(row){
+                document.getElementById('btnassociate').disabled = false ;
+            } ,
+
+            columns: [{
+                field: 'state',
+                radio : true
+            } , 
+
+            {
+                field: 'id',
+                title: 'Id',
+                align: 'left',
+                valign: 'middle',
+                sortable: false , 
+                visible : false 
+            } ,
+
+            {
+                field: 'venid',
+                title: 'ID',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } , 
+
+            {
+                field: 'ventype',
+                title: 'Type',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } , 
+
+            {
+                field: 'name',
+                title: 'Name',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'addr',
+                title: 'Address',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'pincode',
+                title: 'Pin Code',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,       
+
+            {
+                field: 'mobno',
+                title: 'Mobile No',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'llno',
+                title: 'Landline No',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            } ,
+
+            {
+                field: 'email',
+                title: 'E-Mail ID',
+                align: 'left',
+                valign: 'middle',
+                sortable: true
+            }                 
+
+            ]
+
+        });
+
+    });
+
+</script>
+
+<script>
+
+    function doVendor(a){
+
+        if(a === 1){
+            document.getElementById('contdiv').style.display="block";
+            document.getElementById('contdiv').style.visibility="visible";
+        }
+        else if(a === 2){
+            var selectedRows =  $('#vendortable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            $("#contid1").val(selectedRow.id);
+        }
+      
+    }
+
+</script>
+
+<br>
+
+<div class="form-group"  style="<%= formGroup %>">
+                        <div class="col-xs-5">
+                            <input type="hidden" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contid1" id="contid1" size="30"/>
+                        </div>
+                    </div>
+
+<div id="contdiv" style="visibility:hidden;display:none;margin-bottom:2px;margin-left:40px;"" class="form-group">
+
+                    <div class="form-group"  style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contid" >Contact ID</label>
+                        <div class="col-xs-5">
+                            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contid" id="contid" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="conttype" >Contact Type</label>
+                        <div class="col-xs-9" id="rad">
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contname" >Contact Name</label>
+                        <div class="col-xs-5">
+                            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contname" id="contname" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contaddr" >Address</label>
+                        <div class="col-xs-5">
+                            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contaddr" id="contaddr" size="30"/>
+                        </div>
+                    </div>                                                            
+
+                    <div class="form-group" style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contpin" >Pin Code</label>
+                        <div class="col-xs-5">
+                            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contpin" id="contpin" size="30" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contmobno" >Mobile Number</label>
+                        <div class="col-xs-5">
+                            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contmobno" id="contmobno" required size="30"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contllno" >Landline Number</label>
+                        <div class="col-xs-5">
+                            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contllno" id="contllno" size="30"/>
+                        </div>
+                    </div>                                                            
+
+                    <div class="form-group" style="<%= formGroup %>">
+                        <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="contemail" >E-Mail ID</label>
+                        <div class="col-xs-5">
+                            <input type="email" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="contemail" id="contemail" required size="30"/>
+                        </div>
+                    </div>
+
+
+</div>
 
 
         <!-- Save button -->
@@ -359,7 +555,7 @@
           <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
             <a onclick="submitFunc();" class="btn btn-primary calibriFont" style="padding-bottom : 10px"> Back to customer details </a>
             <a onclick="submitFunc1();" class="btn btn-primary calibriFont" style="padding-bottom : 10px"> Back to View details </a>
-            &nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Save" />
+            <a onclick="submitFunc3();" class="btn btn-primary calibriFont" style="padding-bottom : 10px"> Save </a>
           </div>
         </div>
 
@@ -370,6 +566,17 @@
 </div>
 
 
+<script>
+
+    $.get('/ventypelist').done( function(data){
+    $('#rad').empty();  
+    for(var i = 0 ; i < data.length ; i++){
+      var radi = '<input type="radio" value="' + data[i].conttypename + '" name="conttype">&nbsp;' + data[i].conttypename + '&nbsp;&nbsp;&nbsp;';
+      document.getElementById('rad').innerHTML = document.getElementById('rad').innerHTML + radi;
+    }
+    }); 
+
+</script>
   
 <script type="text/javascript">
   
@@ -379,9 +586,12 @@ function submitFunc()
   }
 function submitFunc1()
   {       
-    window.location='/viewproj?id=' + '<%= cust.id %>'
+    window.location='/viewproj?id=' + '<%= cust.id %>';
   }
-
+function submitFunc3()
+  {       
+    document.getElementById('myform').submit();
+  }
 
  $(function(){
 

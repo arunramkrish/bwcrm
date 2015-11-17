@@ -400,6 +400,10 @@ module.exports.routes = {
     action : 'listProjReq1'
   } ,
 
+  'GET /listprojvendors' : {
+    controller : 'ProjectController' , 
+    action : 'listProjVendors'
+  } ,
 
   'GET /listcustvisit' : {
     controller : 'ProjectController' , 
@@ -409,17 +413,327 @@ module.exports.routes = {
   'GET /listcustfp' : {
     controller : 'ProjectController' , 
     action : 'listCustFp'
-  },
+  } ,
+
+  'GET /listcontacts' : {
+    controller : 'ProjectController' , 
+    action : 'ConatctBoardPage'
+  } ,
+
+  'GET /listprojcontacts' : {
+    controller : 'ProjectController' , 
+    action : 'listProjContacts'
+  } ,
+
+  //Project Requirement 
+
+
+  // 'GET /projreq' : {
+  //   controller : 'ProjectController' , 
+  //   action : 'projreqPage'
+  // } , 
+
+  // 'POST /projreq' : {
+  //   controller : 'ProjectController' , 
+  //   action : 'projreqlist'
+  // } 
+
+  // 'GET /projreqlist' : {
+  //   controller : 'ProjectController' , 
+  //   action : 'projreqlist'
+  // } , 
+
+
+  'GET /reqadd' : {
+    controller : 'RequirementController' , 
+    action : 'reqAddPage'
+  } , 
+  'POST /reqadd' : {
+    controller : 'RequirementController' , 
+    action : 'reqAdd'
+  } ,
+
+  'GET /listreq' : {
+    controller : 'RequirementController' ,
+    action : 'listReq'
+  } ,
+
+  'POST /requpdate' : { 
+    controller : 'RequirementController' ,
+    action : 'reqUpdate'
+  } ,
+
+  'GET /deletereq' : {
+    controller : 'RequirementController' ,
+    action :'deleteReq'
+  } ,
+
+  'GET /reqboard' : {
+    controller : 'RequirementController' ,
+    action : 'reqBoardPage'
+  } ,
+
+  'GET /reqedit' : {
+    controller : 'RequirementController' ,
+    action : 'reqEditPage'
+  } ,
+
+  'GET /statustypelist' : {
+    controller : 'RequirementController' , 
+    action : 'StatusTypeList'
+  } ,
+
+//contacts
+
+'GET /contadd' : {
+    controller : 'ContactController' , 
+    action : 'contAddPage'
+  } , 
+
+  'POST /contadd' : {
+    controller : 'ContactController' , 
+    action : 'contAdd'
+  } ,
+
+
+  'GET /listcont' : {
+    controller : 'ContactController' ,
+    action : 'listCont'
+  } ,
+
+  'POST /contupdate' : { 
+    controller : 'ContactController' ,
+    action : 'contUpdate'
+  } ,
+
+  'GET /deletecont' : {
+    controller : 'ContactController' ,
+    action :'deleteCont'
+  } ,
+
+  'GET /contboard' : {
+    controller : 'ContactController' ,
+    action : 'contBoardPage'
+  } ,
+
+   'GET /projcontboard' : {
+    controller : 'ContactController' ,
+    action : 'projcontBoardPage'
+  } ,
+
+
+  'GET /contedit' : {
+    controller : 'ContactController' ,
+    action : 'contEditPage'
+  } , 
+
+
+//visit
+
+  'GET /visitadd' : {
+    controller : 'VisitController' , 
+    action : 'visitAddPage'
+  } , 
+
+  'POST /visitadd' : {
+    controller : 'VisitController' , 
+    action : 'visitAdd'
+  } ,
+
+  'GET /listvisit' : {
+    controller : 'VisitController' ,
+    action : 'listVisit'
+  } ,
+
+  'POST /visitupdate' : { 
+    controller : 'VisitController' ,
+    action : 'visitUpdate'
+  } ,
+
+  'GET /deletevisit' : {
+    controller : 'VisitController' ,
+    action :'deleteVisit'
+  } ,
+
+  'GET /visitboard' : {
+    controller : 'VisitController' ,
+    action : 'visitBoardPage'
+  } ,
+
+  'GET /visitedit' : {
+    controller : 'VisitController' ,
+    action : 'visitEditPage'
+  } ,
+
+  'GET /requvisit' : {
+    controller : 'VisitController' ,
+    action : 'requvisitEditPage'
+  } ,
+
+  'GET /passreqid' : {
+    controller : 'VisitController' ,
+    action :'passReqID'
+  } ,
+
+  'GET /listreqvisit' : {
+    controller : 'VisitController' , 
+    action : 'listReqVisit'
+  } ,
+
+  'GET /passprojid' : {
+    controller : 'VisitController' ,
+    action :'passProjID'
+  } ,
+
+  'GET /listprojvisit' : {
+    controller : 'VisitController' , 
+    action : 'listProjVisit'
+  } ,
+
+
+  'GET /listfp' : {
+    controller : 'VisitController' , 
+    action : 'listFP'
+  } ,
+
+
+//Follow up
+'GET /fuadd' : {
+    controller : 'FollowupController' , 
+    action : 'fuAddPage'
+  } , 
+
+  'POST /fuadd' : {
+    controller : 'FollowupController' , 
+    action : 'fuAdd'
+  } ,
+
+  'GET /listfu' : {
+    controller : 'FollowupController' ,
+    action : 'listFu'
+  } ,
+
+  'POST /fuupdate' : { 
+    controller : 'FollowupController' ,
+    action : 'fuUpdate'
+  } ,
+
+  'GET /deletefu' : {
+    controller : 'FollowupController' ,
+    action :'deleteFu'
+  } ,
 
   'GET /fuboard' : {
-    controller: 'FollowupController',
-    action: 'fuboardpage'
-  },
+    controller : 'FollowupController' ,
+    action : 'fuBoardPage'
+  } ,
 
-  'GET /fuAddPage' : {
-    controller: 'FollowupController',
-    action: 'fuAddPage'
-  }
+  'GET /fuedit' : {
+    controller : 'FollowupController' ,
+    action : 'fuEditPage'
+  } ,
+ 
+  'POST /fpvisitadd' : { 
+    controller : 'FollowupController' ,
+    action : 'fpVisitAdd'
+  } ,
+
+//Follow up action log
+
+
+  'GET /fualogadd' : {
+    controller : 'FollowupController' , 
+    action : 'fualogAddPage'
+  } , 
+
+  'POST /fualogadd' : {
+    controller : 'FollowupController' , 
+    action : 'fualogAdd'
+  } ,
+  'GET /listfualog' : {
+    controller : 'FollowupController' ,
+    action : 'listFualog'
+  } ,
+
+  'POST /fualogupdate' : { 
+    controller : 'FollowupController' ,
+    action : 'fualogUpdate'
+  } ,
+
+  'GET /deletefualog' : {
+    controller : 'FollowupController' ,
+    action :'deleteFualog'
+  } ,
+
+  'GET /fualogboard' : {
+    controller : 'FollowupController' ,
+    action : 'fualogBoardPage'
+  } ,
+
+  'GET /fualogedit' : {
+    controller : 'FollowupController' ,
+    action : 'fualogEditPage'
+  } ,
+ 
+//Reports
+
+  'GET /report/requirement' : {
+    controller : 'ReportController' , 
+    action : 'reportsRequirement'
+  } , 
+
+  'GET /reports/requgraph' : {
+  controller : 'ReportController' ,
+  action : 'getRequirementGraph'
+  } ,
+
+  'GET /report/searchreqdate' : {
+    controller : 'ReportController' , 
+    action : 'reportsSearchReqDatePage'
+  } ,
+
+  'POST /reportsSearchReqDate' : {
+    controller : 'ReportController' , 
+    action : 'reportsSearchReqDate'
+  } ,
+
+  //Vendor Controller 
+
+  'GET /listvendors' : {
+    controller : 'VendorController' ,
+    action : 'listVendors'
+  } ,
+
+  'GET /vendorboard' : {
+    controller : 'VendorController' ,
+    action : 'vendorBoardPage'
+  } ,
+
+  'POST /vendoradd' : {
+    controller : 'VendorController' ,
+    action : 'vendorAdd'
+  } ,
+
+  'GET /deletevendor' : {
+    controller : 'VendorController' ,
+    action :'deleteVendor'
+  } ,
+
+  'POST /vendorupdate' : { 
+    controller : 'VendorController' ,
+    action : 'vendorUpdate'
+  } ,
+
+  'POST /vendorupdate1' : { 
+    controller : 'VendorController' ,
+    action : 'vendorUpdate1'
+  } ,
+
+  'GET /ventypelist' : {
+    controller : 'VendorController' , 
+    action : 'venTypeList'
+  } 
+
 
 
 

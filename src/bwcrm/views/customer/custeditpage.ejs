@@ -27,7 +27,7 @@
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" class="<%= labelColClass %>" for="custname" >Customer Name</label>
           <div class="<%= textBoxColClass %>">
-            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" required value=<%=p_cust.custname %> >
+            <input type="text" style="<%= textInputStyle %>"  class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="custname" id="custname" required value="<%=p_cust.custname %>" >
           </div>
         </div>
 
@@ -46,7 +46,7 @@
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" for="phnum" class="<%= labelColClass %>">Phone Number</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="phnum" id="phnum"  value=<%=p_cust.phnum %> >
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="phnum" id="phnum"  value="<%=p_cust.phnum %>" >
           </div>
         </div>
 
@@ -54,7 +54,7 @@
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" for="addr" class="<%= labelColClass %>">Address</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="addr" id="addr"  value=<%=p_cust.addr %> >
+            <input style="<%= textInputStyle %>" type="tel" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="addr" id="addr"  value="<%=p_cust.addr %>" >
           </div>
         </div>
 
@@ -62,7 +62,7 @@
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" for="locality" class="<%= labelColClass %>">Locality</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="locality" id="locality" value=<%=p_cust.locality%>>
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="locality" id="locality" value="<%=p_cust.locality%>">
           </div>
         </div>    
 
@@ -70,7 +70,7 @@
         <div class="form-group" style="<%= formGroup %>">
           <label style="<%= labelSpaceWidth%>" for="pincode" class="<%= labelColClass %>">PIN Code</label>
           <div class="<%= textBoxColClass %>">
-            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="pincode" id="pincode" value=<%=p_cust.pincode%>>
+            <input style="<%= textInputStyle %>" type="text" class="form-control" style="padding-left: 5px; height : 30px ; align : left" name="pincode" id="pincode" value="<%=p_cust.pincode%>">
           </div>
         </div>
 
@@ -114,6 +114,9 @@
         <div class="form-group" style="<%= formGroup %>">
           <div class="col-lg-10 col-lg-offset-2" style="margin-top : 10px;">
             <input type="submit" class="btn btn-primary" value="Update" />
+            <a onclick="submitFunc1(); return true" class="btn btn-primary calibriFont" style="padding-bottom : 10px">
+              <i class="fa fa-right"></i> &nbsp; Cancel
+            </a>
           </div>
         </div>
         
@@ -121,3 +124,11 @@
     </form>
   </div>
 </div>
+
+<script type="text/javascript">
+  function submitFunc1()
+  {        
+    window.location = 'customer/custboardpage';    
+  }
+
+</script>

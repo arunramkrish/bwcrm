@@ -39,7 +39,7 @@ module.exports = {
       required : false
     } ,
 
-    measure : { 
+    measureqty : { 
       type : 'string' ,
       required : false
     } ,
@@ -47,6 +47,11 @@ module.exports = {
     approx : { 
       type : 'string' ,
       required : false
+    } ,
+
+    reqdate : {
+      type : 'string' ,
+      required : false 
     } ,
 
     remarks : {
@@ -69,10 +74,10 @@ module.exports = {
       required : false 
     } ,
 
-    updatedby : {
+    /*updatedby : {
       model : 'user' ,
       required : false 
-    } ,
+    } ,*/
     
     sexec : {
       type : 'string' ,
@@ -84,7 +89,7 @@ module.exports = {
       required : false 
     } ,
 
-    updby : {
+    /*updby : {
       type : 'string' ,
       required : false 
     } ,
@@ -92,7 +97,7 @@ module.exports = {
     fudate : {
       type : 'string' ,
       required : false 
-    }  
+    } */ 
 
   }
   

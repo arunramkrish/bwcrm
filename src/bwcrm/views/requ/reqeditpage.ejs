@@ -114,5 +114,10 @@
     $('.datepicker').datepicker({
       format: 'mm/dd/yyyy'
     });
+
+    $('#nfudate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });    
+
   });
 </script>

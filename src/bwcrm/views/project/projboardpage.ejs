@@ -4,12 +4,11 @@
 <center>
 <button onclick="doUser(2);" id="btnEdit" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit project</button>
 <button onclick="doUser(3);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
-<button onclick="doUser(4);" id="btnReq" class="btn btn-warning" disabled><i class="fa fa-list"></i> &nbsp; Add Requirements</button>
-<button onclick="doUser(5);" id="btnContact" class="btn btn-info" disabled><i class="fa fa-user"></i> &nbsp;Add Contacts</button>
+<!--<button onclick="doUser(4);" id="btnReq" class="btn btn-warning" disabled><i class="fa fa-list"></i> &nbsp; Add Requirements</button>
+<button onclick="doUser(5);" id="btnContact" class="btn btn-info" disabled><i class="fa fa-user"></i> &nbsp;Add Contacts</button>-->
 <button onclick="doUser(6);" id="btnvisit" class="btn btn-info" disabled><i class="fa fa-user"></i> &nbsp;Add Visit</button>
-<button onclick="doUser(7);" id="btnfu" class="btn btn-info" disabled><i class="fa fa-user"></i> &nbsp;Add Followup</button>
-
-
+<button onclick="doUser(8);" id="btnContacts" class="btn btn-info" disabled><i class="fa fa-user"></i> &nbsp;Show Contacts</button>
+<!--<button onclick="doUser(7);" id="btnfu" class="btn btn-info" disabled><i class="fa fa-user"></i> &nbsp;Add Followup</button>-->
 </center>
 <script>
     <% if( query !== undefined ){
@@ -52,7 +51,7 @@
                 }
             }); 
     	}
-        else if(a === 4)
+        /*else if(a === 4)
         {
             var selectedRows =  $('#projtable').bootstrapTable('getSelections');
             var selectedRow = selectedRows[0];
@@ -65,19 +64,26 @@
             var selectedRow = selectedRows[0];
             var uri = encodeURI("/projcontboard?id=" + selectedRow.id);
             window.location = uri ;
-        }
-         else if(a === 6)
+        }*/
+        else if(a === 6)
         {
             var selectedRows =  $('#projtable').bootstrapTable('getSelections');
             var selectedRow = selectedRows[0];
             var uri = encodeURI("/visitadd?id=" + selectedRow.id);
             window.location = uri ;
         }
-        else
+        /*else
         {
             var selectedRows =  $('#projtable').bootstrapTable('getSelections');
             var selectedRow = selectedRows[0];
             var uri = encodeURI("/fuadd?id=" + selectedRow.id);
+            window.location = uri ;
+        }*/
+        else if(a === 8)
+        {
+            var selectedRows =  $('#projtable').bootstrapTable('getSelections');
+            var selectedRow = selectedRows[0];
+            var uri = encodeURI("/listcontacts?id=" + selectedRow.id);
             window.location = uri ;
         }
     }
@@ -94,10 +100,11 @@
             onCheck : function(row){
             	document.getElementById('btnEdit').disabled = false ;
                 document.getElementById('btnDelete').disabled = false ;
-                document.getElementById('btnReq').disabled = false ;
-                document.getElementById('btnContact').disabled = false ;
+                /*document.getElementById('btnReq').disabled = false ;
+                document.getElementById('btnContact').disabled = false ;*/
                 document.getElementById('btnvisit').disabled = false ;
-                document.getElementById('btnfu').disabled = false ;
+                /*document.getElementById('btnfu').disabled = false ;*/
+                document.getElementById('btnContacts').disabled = false ;
             } ,
 
             columns: [{

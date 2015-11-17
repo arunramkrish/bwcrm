@@ -2,7 +2,7 @@
 <table id="futable"></table>
 <br />
 <center>
-<button onclick="doreq(1);" id="btnadd" class="btn btn-primary"><i class="fa fa-plus"></i> &nbsp; Add Follow-up</button>
+
 <button onclick="doreq(2);" id="btnEdit" class="btn btn-primary" disabled><i class="fa fa-edit"></i> &nbsp; Edit</button>
 <button onclick="doreq(3);" id="btnDelete" class="btn btn-danger" disabled><i class="fa fa-trash"></i> &nbsp; Delete</button>
 <button onclick="doreq(4);" id="btnalog" class="btn btn-primary" disabled><i class="fa fa-plus"></i> &nbsp; Add action</button>
@@ -19,10 +19,7 @@
 </script>
 <script>
     function doreq(a){
-         if ( a === 1 ) {
-            var uri = encodeURI("/fuAddPage");
-            window.location = uri ;
-        } else if ( a === 2){
+    	 if ( a === 2){
             var selectedRows =  $('#futable').bootstrapTable('getSelections');
             var selectedRow = selectedRows[0];
             var uri = encodeURI("/fuedit?id=" + selectedRow.id);
@@ -52,13 +49,14 @@
             var uri = encodeURI("/fualogadd?id=" + selectedRow.id);
             window.location = uri ;
         } 
+        
+       
     }
     $(function () {
-        console.log("bootstrap table");
         $('#futable').bootstrapTable({
             method: 'get',
             url: '/listfu',
-            cache: false,
+            cache: false,            
             striped: false ,
             pagination: false,
             search: true,
@@ -162,6 +160,8 @@
                 valign: 'middle',
                 sortable: true
             } 
+             
+           
             
             ]
         });

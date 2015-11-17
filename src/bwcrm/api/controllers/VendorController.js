@@ -24,13 +24,13 @@ module.exports = {
 				    email : req.param('email') 
 				}).exec(function(err , vend){
 					sails.log('Vendor Created : ' + vend.venid);
-					return res.redirect('/vendorboard?q=added');			
+					return res.redirect('/vendorboard?id=' + req.param('customerid'));			
 				});
 			}			
 			else
 			{
 				sails.log('Duplicate Vendor : ' + req.param('venid'));
-				return res.redirect('/vendorboard?q=alreadythere');
+				return res.redirect('/vendorboard?id=' + req.param('customerid'));
 			}
 		});
 	} ,
@@ -71,6 +71,31 @@ module.exports = {
 
         });
     } ,
+
+    vendorUpdate1 : function ( req , res ) {
+        Vendor.findOne({ id : req.param('vid')}).exec(function(err , myvendor){
+                if(err)
+                    return res.json({ error : err });
+                Vendor.update({
+                    id : req.param('vid')
+                } ,
+                {
+                    venid : req.param('vvenid') ,
+                    ventype : req.param('vventype') ,
+                    name : req.param('vname') ,
+                    addr : req.param('vaddr') ,
+                    pincode : req.param('vpincode') ,
+                    mobno : req.param('vmobno') ,
+                    llno : req.param('vlandlineno') ,
+                    email : req.param('vemail') 
+                }).exec(function(err , vend){
+                    if(err)
+                        ErrorService.reportError(err , res);                                            
+                    return res.redirect('/projboard');  
+                });                 
+
+        });
+    } ,    
 
 	deleteVendor : function ( req , res ){ 
 		Vendor.destroy({ id : req.param('id')}).exec(function ( err , vendor ){
